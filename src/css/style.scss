@@ -1,19 +1,119 @@
 @import './scss/reset';
 
 .project-section {
-  padding: 50px 20px;
-  border: solid 1px black;
-  height: 100vh;
+  padding: 50px 30px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  background-image: linear-gradient(to right, rgb(129, 206, 202), rgb(97, 218, 137));
+  min-height: 100vh;
   align-content: flex-start;
+
+}
+
+.section-head {
+  font-size: 30px;
+  font-weight: 700;
+  color:#000;
+  margin-bottom: 10px;
+}
+
+.add-project {
+  border: none;
+  border-bottom: 2px, solid,rgb(154, 198, 236);
+  border-bottom: solid;
+  font-size: 16px;
+  height: 30px;
+  margin-bottom: 15px;
+  padding: 8px;
 }
 
 .project {
   width: 100%;
   height: 50px;
-  text-align: center;
+  text-align: start;
+  border-top: 2px solid aliceblue;
+  padding-left: 0;
 }
 
 .project-title {
+  margin-top: 15px;
   font-size: 1.5rem;
   font-weight: bold;
+}
+
+.project:hover {
+  transform: scale(1.2);
+  transition: ease-in-out;
+}
+// todo details section
+.todo-section {
+  margin-left: 40px;
+  padding: 30px;
+  background-image: linear-gradient(to left bottom, rgb(129, 206, 202), rgb(97, 218, 137));
+
+}
+.todo-head {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.todo-head p {
+  color: rgb(87, 182, 123);
+}
+
+.todo-head p:hover {
+  transform: scale(1.3);
+  transition: ease-in-out;
+}
+
+
+// new form will be hidden
+.new-form {
+  margin: auto;
+  padding: 10px;
+
+}
+.new-form input,
+.new-form textarea {
+  margin: 10px;
+  margin-left: 0;
+  padding: 5px;
+  border: none;
+  border-bottom: 2px solid;
+}
+.todo-item {
+  color: rgb(40, 138, 97);
+  background-color: #fff;
+}
+
+.todo-item-head {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.todo-item-head:hover {
+  transform: scale(1.1);
+  transition: ease-out;
+}
+
+i {
+  padding: 5px;
+}
+
+.delete-icon:hover,
+.edit-icon:hover {
+  transform: scale(2);
+}
+// footer section
+.footer-section {
+  padding: 10px;
+  background-color:black;
+  color:#fff;
+  position: sticky;
 }

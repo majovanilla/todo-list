@@ -1,8 +1,13 @@
+function clearList(parentNode) {
+  while (parentNode.firstChild) {
+    parentNode.removeChild(parentNode.firstChild);
+  }
+}
 export default function renderProject() {
   const projectsArr = JSON.parse(localStorage.getItem('projects'));
-  const section = document.querySelector('.project-section');
+  const section = document.querySelector('.project-list');
   section.classList.add('row');
-
+  clearList(section);
   if (projectsArr !== null) {
     projectsArr.forEach((project) => {
       const projectDiv = document.createElement('div');

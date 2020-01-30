@@ -1,8 +1,11 @@
+import getProjectsArr from '../index';
+const projects = getProjectsArr();
 
-const projects = [];
 
 function addProject(newProject) {
+  console.log(projects);
   projects.push(newProject);
+
 }
 
 function deleteProject(index) {
@@ -13,6 +16,9 @@ function editProject(index, title) {
   projects[index].title = title;
 }
 
+function updateLocalStorage() {
+  localStorage.setItem('projects', JSON.stringify(projects));
+}
 export {
-  addProject, projects, deleteProject, editProject,
+  addProject, deleteProject, editProject, updateLocalStorage
 };
