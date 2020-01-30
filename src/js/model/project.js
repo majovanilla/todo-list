@@ -1,4 +1,4 @@
 
-export default function project(title, todoList = []) {
+export default function Project(title, todoList = []) {
   return { title, todoList };
 }

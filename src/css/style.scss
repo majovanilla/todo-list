@@ -1,1 +1,19 @@
 @import './scss/reset';
+
+.project-section {
+  padding: 50px 20px;
+  border: solid 1px black;
+  height: 100vh;
+  align-content: flex-start;
+}
+
+.project {
+  width: 100%;
+  height: 50px;
+  text-align: center;
+}
+
+.project-title {
+  font-size: 1.5rem;
+  font-weight: bold;
+}

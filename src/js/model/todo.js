@@ -1,3 +1,5 @@
-export default function todoItem(title, description = null, due = null, priority = null) {
-    return { title, description, due, priority };
+export default function TodoItem(title, description = null, due = null, priority = null) {
+  return {
+    title, description, due, priority,
+  };
 }

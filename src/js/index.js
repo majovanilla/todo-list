@@ -1,12 +1,9 @@
 import '../css/style.scss';
-import project from './model/project';
+import Project from './model/project';
 import { addProject, projects, deleteProject } from './controller/projectCtrl';
-import todoItem from './model/todo';
+import TodoItem from './model/todo';
 import renderProject from './view/projectView';
-
-// const project = projectCtrl.project('New project title');
-
-// console.log(project);
+import * as todoListCtrl from './controller/todoListCtrl'
 
 // const mainController = (() => {
 //     const eventHandler = () => {
@@ -15,19 +12,18 @@ import renderProject from './view/projectView';
 // })();
 
 function updateLocalStorage() {
-    localStorage.setItem('projects', JSON.stringify(projects));
+  localStorage.setItem('projects', JSON.stringify(projects));
 }
 
 function createProject(title) {
-    const project1 = project(title);
-    addProject(project1);
-    renderProject(title);
+  const p = Project(title);
+  addProject(p);
+  updateLocalStorage();
+  renderProject();
 }
 
 
-createProject("TODO list js project");
-createProject("Library js project");
-// const todo1 = todoItem("Create frontend part");
-// project1.todoList.push(todo1);
-// console.log(project1);
+const p1 = createProject("TODO list js project");
+const p2 = createProject("Library js project");
+console.log(p1);
 console.log(projects);

@@ -1,19 +1,14 @@
 function addTodo(project, todo) {
-    project.todoList.push(todo);
-    updateLocalStorage();
+  project.todoList.push(todo);
 }
 
 function deleteTodo(project, index) {
-    project.todoList.splice(index, 1);
-    updateLocalStorage();
+  project.todoList.splice(index, 1);
 }
 
-function editTodo(index, title) {
-    project.todolist.[index].title = title;
-    project.todolist.[index].description = description;
-    project.todolist.[index].due = due;
-    project.todolist.[index].priority = priority;
-    updateLocalStorage();
+// Check this function!!
+function editTodo(project, todo) {
+  const { titile, description, due, priority } = todo;
 }
 
 export { addTodo, deleteTodo, editTodo };
