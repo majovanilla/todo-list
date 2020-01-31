@@ -7,17 +7,32 @@ function updateProjects() {
   }
 }
 
+function generateID() {
+  let ID;
+  if (projects.length > 0) {
+    ID = projects[projects.length - 1].id + 1;
+  } else if (projects.length === 0) {
+    ID = 0;
+  }
+  return ID;
+}
+
 function getProjectArr() {
   return projects;
 }
 
 function addProject(newProject) {
   projects.push(newProject);
-  newProject.id = projects.indexOf(newProject);
 }
 
-function deleteProject(index) {
-  projects.splice(index, 1);
+function deleteProject(id) {
+  const ids = projects.map(current => {
+    return current.id;
+  });
+  const index = ids.indexOf(id);
+  if (index !== -1) {
+    projects.splice(index, 1);
+  }
 }
 
 function editProject(index, title) {
@@ -33,6 +48,6 @@ function findProject(id) {
 }
 
 export {
-  addProject, getProjectArr, updateProjects, deleteProject,
+  addProject, getProjectArr, generateID, updateProjects, deleteProject,
   editProject, updateLocalStorage, findProject,
 };

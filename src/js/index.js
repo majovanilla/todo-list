@@ -1,6 +1,6 @@
 import '../css/style.scss';
 import Project from './model/project';
-import { addProject, updateProjects, getProjectArr, updateLocalStorage, deleteProject, findProject } from './controller/projectCtrl';
+import { addProject, updateProjects, generateID, getProjectArr, updateLocalStorage, deleteProject, findProject } from './controller/projectCtrl';
 import TodoItem from './model/todo';
 import { renderProject, clearInput } from './view/projectView';
 import * as todoListCtrl from './controller/todoListCtrl';
@@ -8,7 +8,8 @@ import dom from './view/domStrings';
 import renderProjectTodos from './view/todoView';
 
 function createProject(title) {
-  const p = Project(title);
+  const ID = generateID();
+  const p = Project(title, ID);
   addProject(p);
   updateLocalStorage();
   renderProject();
@@ -23,23 +24,28 @@ const mainController = (() => {
     }
   };
 
-  const projectClick = event => {
-    const projectId = event.currentTarget.id;
+  const projectClick = (projectId) => {
     const project = findProject(projectId);
     renderProjectTodos(project);
   };
 
-  const deleteProject = e => {
-    const deleteButton = e.currentTarget;
-    console.log(deleteButton);
-    // const projectId = deleteButton.previousSibling;
-    // const project = findProject(projectId);
-
+  const projectDelete = (id) => {
+    const ID = parseInt(id, 10);
+    deleteProject(ID);
+    updateLocalStorage();
+    renderProject();
   };
 
   const eventHandler = () => {
     dom.newProject.addEventListener('keypress', addNewProject);
-    dom.projectDiv.addEventListener('click', projectClick);
+    dom.projectDiv.addEventListener('click', e => {
+      if (e.target.id) {
+        projectClick(e.target.id);
+      } else {
+        const projectID = e.target.parentNode.firstChild.id;
+        projectDelete(projectID);
+      }
+    });
   };
 
   return { eventHandler };

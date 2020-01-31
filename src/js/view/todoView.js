@@ -25,6 +25,9 @@ function renderForm() {
                         </div>`;
   section.innerHTML += todoForm;
 }
+const clearTodo = () => {
+  section.innerHTML = '';
+};
 
 function renderTodoList(project) {
   const todo = project.todoList;
