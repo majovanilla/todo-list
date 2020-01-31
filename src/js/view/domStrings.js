@@ -1,6 +1,6 @@
 const dom = {
   newProject: document.querySelector('.add-project'),
-  projectDiv: document.querySelector('.project'),
+  projectDiv: document.querySelector('.project-list'),
   projectTitle: document.querySelector('.project-title'),
   newTodo: document.querySelector('.new-todo'),
   todoTitle: document.querySelector('#todoTitle'),

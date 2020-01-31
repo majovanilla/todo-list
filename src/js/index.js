@@ -33,6 +33,7 @@ const mainController = (() => {
 
   const eventHandler = () => {
     dom.newProject.addEventListener('keypress', addNewProject);
+    console.log(dom.projectDiv);
     dom.projectDiv.addEventListener('click', projectClick);
   };
 

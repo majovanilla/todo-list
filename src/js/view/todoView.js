@@ -5,7 +5,7 @@ function renderHead() {
                         <h2 class="todo-head">List of TODOs</h2>
                         <p><i class="fa fa-plus-circle new-todo"></i></p>
                       </div>`;
-  section.append(todoHead);
+  section.innerHTML += todoHead;
 }
 
 function renderForm() {
@@ -23,7 +23,7 @@ function renderForm() {
                             <button class="btn-lg btn-success" id="add-todo">Add</button>
                           </form>
                         </div>`;
-  section.append(todoForm);
+  section.innerHTML += todoForm;
 }
 
 function renderTodoList(project) {
@@ -64,12 +64,12 @@ export default function renderProjectTodos(project) {
   renderTodoList(project);
 }
 
-function renderDetails() {
-  const { todoTitle, description, due, priority } = todo;
-  const section = document.querySelector('.todo-section');
-  const todoDiv = document.createElement('div');
-  const title = document.createElement('h3');
-  title.textContent = todoTitle;
-  todoDiv.append(title);
-  section.append(todoDiv);
-}
+// function renderDetails() {
+//   const { todoTitle, description, due, priority } = todo;
+//   const section = document.querySelector('.todo-section');
+//   const todoDiv = document.createElement('div');
+//   const title = document.createElement('h3');
+//   title.textContent = todoTitle;
+//   todoDiv.append(title);
+//   section.append(todoDiv);
+// }

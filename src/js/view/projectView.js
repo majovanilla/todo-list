@@ -17,9 +17,9 @@ function renderProject() {
     projectsArr.forEach((project) => {
       const projectDiv = document.createElement('div');
       projectDiv.classList.add('project', 'col-12');
-      projectDiv.setAttribute('id', project.id);
       const h2 = document.createElement('h2');
       h2.classList.add('project-title');
+      h2.setAttribute('id', project.id);
       h2.textContent = project.title;
       projectDiv.append(h2);
       section.append(projectDiv);
