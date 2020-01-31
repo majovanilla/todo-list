@@ -58,7 +58,12 @@ function renderTodoList(project) {
   section.append(todoListDiv);
 }
 
+const clearTodo = () => {
+  section.innerHTML = '';
+};
+
 export default function renderProjectTodos(project) {
+  clearTodo();
   renderHead();
   renderForm();
   renderTodoList(project);
