@@ -1,3 +1,5 @@
+import dom from './domStrings';
+
 const section = document.querySelector('.todo-section');
 
 function renderHead() {
@@ -61,16 +63,23 @@ function renderTodoList(project) {
   section.append(todoListDiv);
 }
 
-const clearTodo = () => {
-  section.innerHTML = '';
-};
+function getTodoInfo() {
+  const todo = {
+    title: document.querySelector('#todoTitle').value,
+    todoDue: document.querySelector('#todoDue').value,
+    priority: document.querySelector('#priority').value,
+    description: document.querySelector('#todoDescription').value,
+  };
+  return todo;
+}
 
-export default function renderProjectTodos(project) {
-  clearTodo();
+function renderProjectTodos() {
+  // clearTodo();
   renderHead();
   renderForm();
-  renderTodoList(project);
 }
+
+export { getTodoInfo, renderProjectTodos, renderTodoList };
 
 // function renderDetails() {
 //   const { todoTitle, description, due, priority } = todo;

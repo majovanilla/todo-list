@@ -1,10 +1,14 @@
-function addTodo(project, todo) {
-  project.todoList.push(todo);
-  todo.id = project.todoList.indexOf(todo);
+function addTodo(projects, projectIndex, todo) {
+  projects[projectIndex].todoList.push(todo);
 }
 
-function deleteTodo(project, index) {
-  project.todoList.splice(index, 1);
+function deleteTodo(list, id) {
+  const ids = list.map(current => current.id);
+
+  const index = ids.indexOf(id);
+  if (index !== -1) {
+    list.splice(index, 1);
+  }
 }
 
 // Check this function!!
