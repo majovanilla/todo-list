@@ -83,23 +83,24 @@
   border: none;
   border-bottom: 2px solid;
 }
-.todo-item {
+.todo-list {
   color: rgb(40, 138, 97);
-  background-color: #fff;
 }
 
-.todo-item-head {
-  display: flex;
+.todo-title {
   flex-direction: row;
-  justify-content: space-between;
   padding: 10px;
   font-size: 16px;
   font-weight: 700;
 }
 
-.todo-item-head:hover {
+.todo-title:hover {
   transform: scale(1.1);
   transition: ease-out;
+}
+
+.todo-item {
+  background-color: #fff;
 }
 
 i {
@@ -110,7 +111,9 @@ i {
 .edit-icon:hover {
   transform: scale(2);
 }
+
 // footer section
+
 .footer-section {
   padding: 10px;
   background-color:black;

@@ -3,7 +3,12 @@ function clearList(parentNode) {
     parentNode.removeChild(parentNode.firstChild);
   }
 }
-export default function renderProject() {
+
+function clearInput(domElement) {
+  domElement.value = '';
+}
+
+function renderProject() {
   const projectsArr = JSON.parse(localStorage.getItem('projects'));
   const section = document.querySelector('.project-list');
   section.classList.add('row');
@@ -12,6 +17,7 @@ export default function renderProject() {
     projectsArr.forEach((project) => {
       const projectDiv = document.createElement('div');
       projectDiv.classList.add('project', 'col-12');
+      projectDiv.setAttribute('id', project.id);
       const h2 = document.createElement('h2');
       h2.classList.add('project-title');
       h2.textContent = project.title;
@@ -20,3 +26,6 @@ export default function renderProject() {
     });
   }
 }
+
+
+export { clearInput, renderProject };

@@ -1,5 +1,6 @@
 function addTodo(project, todo) {
   project.todoList.push(todo);
+  todo.id = project.todoList.indexOf(todo);
 }
 
 function deleteTodo(project, index) {
@@ -7,8 +8,8 @@ function deleteTodo(project, index) {
 }
 
 // Check this function!!
-function editTodo(project, todo) {
-  const { titile, description, due, priority } = todo;
-}
+// function editTodo(project, todo) {
+//   const { title, description, due, priority } = todo;
+// }
 
-export { addTodo, deleteTodo, editTodo };
+export { addTodo, deleteTodo };

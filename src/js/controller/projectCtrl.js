@@ -10,8 +10,10 @@ function updateProjects() {
 function getProjectArr() {
   return projects;
 }
+
 function addProject(newProject) {
   projects.push(newProject);
+  newProject.id = projects.indexOf(newProject);
 }
 
 function deleteProject(index) {
@@ -25,6 +27,12 @@ function editProject(index, title) {
 function updateLocalStorage() {
   localStorage.setItem('projects', JSON.stringify(projects));
 }
+
+function findProject(id) {
+  return projects[id];
+}
+
 export {
-  addProject, getProjectArr, updateProjects, deleteProject, editProject, updateLocalStorage
+  addProject, getProjectArr, updateProjects, deleteProject,
+  editProject, updateLocalStorage, findProject,
 };
