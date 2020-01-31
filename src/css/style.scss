@@ -27,7 +27,9 @@
 }
 
 .project {
-  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
   height: 50px;
   text-align: start;
   border-top: 2px solid aliceblue;
@@ -35,7 +37,6 @@
 }
 
 .project-title {
-  margin-top: 15px;
   font-size: 1.5rem;
   font-weight: bold;
 }

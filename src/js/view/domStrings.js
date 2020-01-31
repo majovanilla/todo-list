@@ -1,7 +1,9 @@
 const dom = {
   newProject: document.querySelector('.add-project'),
   projectDiv: document.querySelector('.project-list'),
+  project: document.querySelector('.project'),
   projectTitle: document.querySelector('.project-title'),
+  deleteProject: document.querySelector('.project-delete-icon'),
   newTodo: document.querySelector('.new-todo'),
   todoTitle: document.querySelector('#todoTitle'),
   todoDue: document.querySelector('#todoDue'),

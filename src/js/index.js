@@ -24,16 +24,21 @@ const mainController = (() => {
   };
 
   const projectClick = event => {
-    const projectId = event.target.id;
-    console.log(projectId);
+    const projectId = event.currentTarget.id;
     const project = findProject(projectId);
-    console.log(project);
     renderProjectTodos(project);
+  };
+
+  const deleteProject = e => {
+    const deleteButton = e.currentTarget;
+    console.log(deleteButton);
+    // const projectId = deleteButton.previousSibling;
+    // const project = findProject(projectId);
+
   };
 
   const eventHandler = () => {
     dom.newProject.addEventListener('keypress', addNewProject);
-    console.log(dom.projectDiv);
     dom.projectDiv.addEventListener('click', projectClick);
   };
 

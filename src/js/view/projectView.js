@@ -21,7 +21,10 @@ function renderProject() {
       h2.classList.add('project-title');
       h2.setAttribute('id', project.id);
       h2.textContent = project.title;
+      const deleteIcon = document.createElement('i');
+      deleteIcon.classList.add('fa', 'fa-window-close', 'project-delete-icon');
       projectDiv.append(h2);
+      projectDiv.append(deleteIcon);
       section.append(projectDiv);
     });
   }
