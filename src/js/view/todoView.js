@@ -25,6 +25,9 @@ function renderForm() {
                         </div>`;
   section.innerHTML += todoForm;
 }
+const clearTodo = () => {
+  section.innerHTML = '';
+};
 
 function renderTodoList(project) {
   const todo = project.todoList;
@@ -59,6 +62,7 @@ function renderTodoList(project) {
 }
 
 export default function renderProjectTodos(project) {
+  clearTodo();
   renderHead();
   renderForm();
   renderTodoList(project);
