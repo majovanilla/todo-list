@@ -1,5 +1,3 @@
-import dom from './domStrings';
-
 const section = document.querySelector('.todo-section');
 
 function renderHead() {
@@ -22,14 +20,15 @@ function renderForm() {
                               <option value="low">Low</option>
                             </select><br>
                             <textarea id="todoDescription" rows="3" cols="30" placeholder="Add description"></textarea><br>
-                            <button class="btn-lg btn-success" id="add-todo">Add</button>
+                            <button type="button" class="btn-lg btn-success" id="add-todo">Add</button>
                           </form>
                         </div>`;
   section.innerHTML += todoForm;
 }
-const clearTodo = () => {
-  section.innerHTML = '';
-};
+
+// const clearTodo = () => {
+//   section.innerHTML = '';
+// };
 
 function renderTodoList(project) {
   const todo = project.todoList;
@@ -74,7 +73,6 @@ function getTodoInfo() {
 }
 
 function renderProjectTodos() {
-  // clearTodo();
   renderHead();
   renderForm();
 }

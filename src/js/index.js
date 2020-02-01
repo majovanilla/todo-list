@@ -8,7 +8,6 @@ import dom from './view/domStrings';
 import { renderProjectTodos, getTodoInfo, renderTodoList } from './view/todoView';
 
 updateProjects();
-
 renderProject();
 renderProjectTodos();
 
@@ -29,9 +28,9 @@ function createTodo(projectID) {
   const todo = getTodoInfo();
   todo.id = ID;
   todoListCtrl.addTodo(projects, projectIndex, todo);
-  updateLocalStorage();
-  const uprojects = getProjectArr();
-  renderTodoList(uprojects[projectIndex]);
+  // updateLocalStorage();
+  //const uprojects = getProjectArr();
+  //renderTodoList(uprojects[projectIndex]);
   //clearInput(dom.newProject);
 }
 
@@ -59,9 +58,8 @@ const mainController = (() => {
   const addButtonAction = () => {
     const selectedProject = document.querySelector('.selected');
     const ID = parseInt(selectedProject.id, 10);
-    // const projects = getProjectArr();
-    // const project = projects.find(element => element.id === ID);
     createTodo(ID);
+    renderTodoList(findProject(ID));
   };
 
 
@@ -76,8 +74,8 @@ const mainController = (() => {
         projectDelete(projectID);
       }
     });
+    document.getElementById('add-todo').addEventListener('click', addButtonAction);
   };
-  document.getElementById('add-todo').addEventListener('click', addButtonAction);
   return { eventHandler };
 })();
 
