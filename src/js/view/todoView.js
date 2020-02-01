@@ -5,11 +5,11 @@ function renderHead() {
                         <h2 class="todo-head">List of TODOs</h2>
                         <p><i class="fa fa-plus-circle new-todo"></i></p>
                       </div>`;
-  section.innerHTML += todoHead;
+  return todoHead;
 }
 
 function renderForm() {
-  const todoForm = `<div class=" row todo-form">
+  const todoForm = `<div class=" row todo-form hidden">
                           <form class="new-form">
                             <input type="text" id="todoTitle" placeholder="Enter title"><br>
                             <input type="date" id="todoDue" placeholder="Add due date"><br>
@@ -23,18 +23,17 @@ function renderForm() {
                             <button type="button" class="btn-lg btn-success" id="add-todo">Add</button>
                           </form>
                         </div>`;
-  section.innerHTML += todoForm;
+  return todoForm;
 }
 
-// const clearTodo = () => {
-//   section.innerHTML = '';
-// };
+const clearTodo = () => {
+  section.innerHTML = '';
+};
 
 function renderTodoList(project) {
   const todo = project.todoList;
-  const todoListDiv = document.createElement('div');
-  todoListDiv.classList.add('todo-list', 'col-12');
-
+  const projectsDiv = document.querySelector('.todo-list');
+  projectsDiv.innerHTML = '';
   todo.forEach(todo => {
     const todoItem = document.createElement('div');
     const todoTitle = document.createElement('div');
@@ -57,9 +56,8 @@ function renderTodoList(project) {
     todoItem.append(todoIcons);
     todoIcons.append(icon2);
     todoIcons.append(icon3);
-    todoListDiv.append(todoItem);
+    projectsDiv.append(todoItem);
   });
-  section.append(todoListDiv);
 }
 
 function getTodoInfo() {
@@ -72,12 +70,21 @@ function getTodoInfo() {
   return todo;
 }
 
-function renderProjectTodos() {
-  renderHead();
-  renderForm();
+function renderTodoSection() {
+  const a = renderHead();
+  section.insertAdjacentHTML('afterbegin', a);
+  const b = renderForm();
+  section.insertAdjacentHTML('beforeend', b);
+  const div = document.createElement('div');
+  div.classList.add('todo-list', 'col-12');
+  section.append(div);
 }
 
-export { getTodoInfo, renderProjectTodos, renderTodoList };
+function toggleForm() {
+  document.querySelector('.todo-form').classList.toggle('hidden');
+}
+
+export { getTodoInfo, clearTodo, renderTodoSection, renderTodoList, toggleForm };
 
 // function renderDetails() {
 //   const { todoTitle, description, due, priority } = todo;

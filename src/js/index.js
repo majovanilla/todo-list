@@ -5,12 +5,10 @@ import TodoItem from './model/todo';
 import { renderProject, clearInput, selectedProject } from './view/projectView';
 import * as todoListCtrl from './controller/todoListCtrl';
 import dom from './view/domStrings';
-import { renderProjectTodos, getTodoInfo, renderTodoList } from './view/todoView';
+import { renderTodoSection, getTodoInfo, renderTodoList, clearTodo, toggleForm } from './view/todoView';
 
-updateProjects();
-renderProject();
-renderProjectTodos();
 
+// OK
 function createProject(title) {
   const ID = generateID(getProjectArr());
   const p = Project(title, ID);
@@ -34,6 +32,7 @@ function createTodo(projectID) {
   //clearInput(dom.newProject);
 }
 
+// OK
 const mainController = (() => {
   const addNewProject = (e) => {
     if (e.key === 'Enter') {
@@ -42,12 +41,15 @@ const mainController = (() => {
     }
   };
 
+  //OK
   const projectClick = (projectId) => {
     const project = findProject(projectId);
     selectedProject(projectId);
+    clearTodo();
+    renderTodoSection();
     renderTodoList(project);
   };
-
+  //OK
   const projectDelete = (id) => {
     const ID = parseInt(id, 10);
     deleteProject(ID);
@@ -59,6 +61,7 @@ const mainController = (() => {
     const selectedProject = document.querySelector('.selected');
     const ID = parseInt(selectedProject.id, 10);
     createTodo(ID);
+    toggleForm();
     renderTodoList(findProject(ID));
   };
 
@@ -73,10 +76,12 @@ const mainController = (() => {
         projectID = e.target.parentNode.firstChild.id;
         projectDelete(projectID);
       }
+      document.querySelector('.new-todo').addEventListener('click', toggleForm);
+      document.getElementById('add-todo').addEventListener('click', addButtonAction);
     });
-    document.getElementById('add-todo').addEventListener('click', addButtonAction);
   };
   return { eventHandler };
 })();
-
+updateProjects();
+renderProject();
 mainController.eventHandler();
