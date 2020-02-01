@@ -33,6 +33,10 @@ function renderProject() {
 }
 
 const selectedProject = (projectId) => {
+  const previousProject = document.querySelector('.selected');
+  if (previousProject) {
+    previousProject.classList.remove('selected');
+  }
   const h2 = document.getElementById(projectId);
   // dom.selectedProject.classList.remove('selected');
   h2.classList.add('selected');

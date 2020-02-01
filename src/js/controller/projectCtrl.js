@@ -43,7 +43,10 @@ function updateLocalStorage() {
 }
 
 function findProject(id) {
-  return projects[id];
+  updateProjects();
+  const ids = projects.map(current => current.id);
+  const index = ids.indexOf(parseInt(id, 10));
+  return projects[index];
 }
 
 export {

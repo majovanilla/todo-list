@@ -26,7 +26,11 @@ function createTodo(projectID) {
   const todo = getTodoInfo();
   todo.id = ID;
   todoListCtrl.addTodo(projects, projectIndex, todo);
-  // updateLocalStorage();
+  updateLocalStorage();
+  toggleForm();
+  const updatedProjects = getProjectArr();
+  const updatedProject = updatedProjects.find(element => element.id === projectID);
+  renderTodoList(updatedProject);
   //const uprojects = getProjectArr();
   //renderTodoList(uprojects[projectIndex]);
   //clearInput(dom.newProject);
@@ -44,8 +48,8 @@ const mainController = (() => {
   //OK
   const projectClick = (projectId) => {
     const project = findProject(projectId);
-    selectedProject(projectId);
     clearTodo();
+    selectedProject(projectId);
     renderTodoSection();
     renderTodoList(project);
   };
@@ -57,12 +61,10 @@ const mainController = (() => {
     renderProject();
   };
 
-  const addButtonAction = () => {
+  const addNewTodo = () => {
     const selectedProject = document.querySelector('.selected');
     const ID = parseInt(selectedProject.id, 10);
     createTodo(ID);
-    toggleForm();
-    renderTodoList(findProject(ID));
   };
 
 
@@ -77,7 +79,7 @@ const mainController = (() => {
         projectDelete(projectID);
       }
       document.querySelector('.new-todo').addEventListener('click', toggleForm);
-      document.getElementById('add-todo').addEventListener('click', addButtonAction);
+      document.getElementById('add-todo').addEventListener('click', addNewTodo);
     });
   };
   return { eventHandler };
