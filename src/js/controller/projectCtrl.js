@@ -7,11 +7,11 @@ function updateProjects() {
   }
 }
 
-function generateID() {
+function generateID(array) {
   let ID;
-  if (projects.length > 0) {
-    ID = projects[projects.length - 1].id + 1;
-  } else if (projects.length === 0) {
+  if (array.length > 0) {
+    ID = array[array.length - 1].id + 1;
+  } else if (array.length === 0) {
     ID = 0;
   }
   return ID;
@@ -26,9 +26,8 @@ function addProject(newProject) {
 }
 
 function deleteProject(id) {
-  const ids = projects.map(current => {
-    return current.id;
-  });
+  const ids = projects.map(current => current.id);
+
   const index = ids.indexOf(id);
   if (index !== -1) {
     projects.splice(index, 1);

@@ -1,3 +1,5 @@
+import dom from './domStrings';
+
 function clearList(parentNode) {
   while (parentNode.firstChild) {
     parentNode.removeChild(parentNode.firstChild);
@@ -30,5 +32,10 @@ function renderProject() {
   }
 }
 
+const selectedProject = (projectId) => {
+  const h2 = document.getElementById(projectId);
+  // dom.selectedProject.classList.remove('selected');
+  h2.classList.add('selected');
+};
 
-export { clearInput, renderProject };
+export { clearInput, renderProject, selectedProject };

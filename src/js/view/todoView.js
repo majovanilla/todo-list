@@ -20,14 +20,15 @@ function renderForm() {
                               <option value="low">Low</option>
                             </select><br>
                             <textarea id="todoDescription" rows="3" cols="30" placeholder="Add description"></textarea><br>
-                            <button class="btn-lg btn-success" id="add-todo">Add</button>
+                            <button type="button" class="btn-lg btn-success" id="add-todo">Add</button>
                           </form>
                         </div>`;
   section.innerHTML += todoForm;
 }
-const clearTodo = () => {
-  section.innerHTML = '';
-};
+
+// const clearTodo = () => {
+//   section.innerHTML = '';
+// };
 
 function renderTodoList(project) {
   const todo = project.todoList;
@@ -61,16 +62,22 @@ function renderTodoList(project) {
   section.append(todoListDiv);
 }
 
-const clearTodo = () => {
-  section.innerHTML = '';
-};
+function getTodoInfo() {
+  const todo = {
+    title: document.querySelector('#todoTitle').value,
+    todoDue: document.querySelector('#todoDue').value,
+    priority: document.querySelector('#priority').value,
+    description: document.querySelector('#todoDescription').value,
+  };
+  return todo;
+}
 
-export default function renderProjectTodos(project) {
-  clearTodo();
+function renderProjectTodos() {
   renderHead();
   renderForm();
-  renderTodoList(project);
 }
+
+export { getTodoInfo, renderProjectTodos, renderTodoList };
 
 // function renderDetails() {
 //   const { todoTitle, description, due, priority } = todo;
