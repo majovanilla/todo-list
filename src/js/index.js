@@ -6,7 +6,7 @@ import { renderProject, clearInput, selectedProject } from './view/projectView';
 import * as todoListCtrl from './controller/todoListCtrl';
 import dom from './view/domStrings';
 import {
-  renderTodoSection, getTodoInfo, renderTodoList, clearTodo, toggleForm, resetForm,
+  renderTodoSection, getTodoInfo, renderTodoList, clearTodo, toggleForm, resetForm, editTodo,
 } from './view/todoView';
 
 
@@ -68,6 +68,19 @@ const mainController = (() => {
     createTodo(ID);
   };
 
+  const todoIconManager = e => {
+    const { id } = e.target;
+    const projectID = id.match(/\d$/).toString();
+    const todoID = id.match(/\d+/).toString();
+    const project = findProject(projectID);
+    const todo = project.todoList[todoID];
+    if (id.match(/edit-\d+/)) {
+      editTodo(todo);
+
+    } else if (id.match(/delete-\d+/g)) {
+      // deleteTodo();
+    }
+  };
 
   const eventHandler = () => {
     dom.newProject.addEventListener('keypress', addNewProject);
@@ -79,12 +92,14 @@ const mainController = (() => {
         projectID = e.target.parentNode.firstChild.id;
         projectDelete(projectID);
       }
-      document.querySelector('.new-todo').addEventListener('click', toggleForm);
+      document.querySelector('.new-todo').addEventListener('click', toggleForm('add'));
       document.getElementById('add-todo').addEventListener('click', addNewTodo);
+      document.querySelector('.todo-list').addEventListener('click', todoIconManager);
     });
   };
   return { eventHandler };
 })();
+
 updateProjects();
 renderProject();
 mainController.eventHandler();

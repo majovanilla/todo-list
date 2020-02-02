@@ -1,3 +1,5 @@
+import dom from "./domStrings";
+
 const section = document.querySelector('.todo-section');
 
 function renderHead() {
@@ -25,6 +27,24 @@ function renderForm() {
                         </div>`;
   return todoForm;
 }
+
+// function renderEditForm() {
+//   const todoForm = `<div class=" row edit-todo-form hidden">
+//                           <form class="new-form">
+//                             <input type="text" id="todoTitle" placeholder="Enter title"><br>
+//                             <input type="date" id="todoDue"><br>
+//                             <select id="priority" name="priority">
+//                               <option value="urgent">Urgent</option>
+//                               <option value="high">High</option>
+//                               <option value="normal">Normal</option>
+//                               <option value="low">Low</option>
+//                             </select><br>
+//                             <textarea id="todoDescription" rows="3" cols="30" placeholder="Add description"></textarea><br>
+//                             <button type="button" class="btn-lg btn-success" id="add-todo">Edit</button>
+//                           </form>
+//                         </div>`;
+//   section.append(todoForm);
+// }
 
 const clearTodo = () => {
   section.innerHTML = '';
@@ -72,7 +92,7 @@ function renderTodoList(project) {
     icon2.classList.add('fa', 'fa-window-close', 'delete-icon');
     icon2.setAttribute('id', `delete-${todo.id}`);
     icon3.classList.add('fa', 'fa-pencil', 'edit-icon');
-    icon3.setAttribute('id', `edit-${todo.id}`);
+    icon3.setAttribute('id', `edit-${todo.id}-${project.id}`);
     icon4.classList.add('fa', 'fa-caret-down', 'details-icon');
     const title = document.createElement('span');
     title.textContent = todo.title;
@@ -104,6 +124,13 @@ function getTodoInfo() {
   return todo;
 }
 
+function setTodoInfo(todo) {
+  document.querySelector('#todoTitle').value = todo.title;
+  document.querySelector('#todoDue').value = todo.todoDue;
+  document.querySelector('#priority').value = todo.priority;
+  document.querySelector('#todoDescription').value = todo.description;
+};
+
 function renderTodoSection() {
   const a = renderHead();
   section.insertAdjacentHTML('afterbegin', a);
@@ -118,11 +145,27 @@ function toggleForm() {
   document.querySelector('.todo-form').classList.toggle('hidden');
 }
 
+function toggleEditForm() {
+  document.querySelector('.edit-todo-form').classList.toggle('hidden');
+}
+
+function loadFormData(todo) {
+  // toggleForm();
+  // renderEditForm();
+  // toggleEditForm();
+  setTodoInfo(todo);
+}
+
 function resetForm() {
   const form = document.querySelector('.new-form');
   form.reset();
 }
 
+function editTodo(todo) {
+  loadFormData(todo);
+
+}
+
 export {
-  getTodoInfo, clearTodo, renderTodoSection, renderTodoList, toggleForm, resetForm,
+  getTodoInfo, clearTodo, renderTodoSection, renderTodoList, toggleForm, resetForm, editTodo,
 };
