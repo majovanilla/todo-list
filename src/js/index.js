@@ -5,7 +5,9 @@ import TodoItem from './model/todo';
 import { renderProject, clearInput, selectedProject } from './view/projectView';
 import * as todoListCtrl from './controller/todoListCtrl';
 import dom from './view/domStrings';
-import { renderTodoSection, getTodoInfo, renderTodoList, clearTodo, toggleForm } from './view/todoView';
+import {
+  renderTodoSection, getTodoInfo, renderTodoList, clearTodo, toggleForm, resetForm,
+} from './view/todoView';
 
 
 // OK
@@ -31,9 +33,7 @@ function createTodo(projectID) {
   const updatedProjects = getProjectArr();
   const updatedProject = updatedProjects.find(element => element.id === projectID);
   renderTodoList(updatedProject);
-  //const uprojects = getProjectArr();
-  //renderTodoList(uprojects[projectIndex]);
-  //clearInput(dom.newProject);
+  resetForm();
 }
 
 // OK
@@ -53,6 +53,7 @@ const mainController = (() => {
     renderTodoSection();
     renderTodoList(project);
   };
+
   //OK
   const projectDelete = (id) => {
     const ID = parseInt(id, 10);

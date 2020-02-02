@@ -12,7 +12,7 @@ function renderForm() {
   const todoForm = `<div class=" row todo-form hidden">
                           <form class="new-form">
                             <input type="text" id="todoTitle" placeholder="Enter title"><br>
-                            <input type="date" id="todoDue" placeholder="Add due date"><br>
+                            <input type="date" id="todoDue"><br>
                             <select id="priority" name="priority">
                               <option value="urgent">Urgent</option>
                               <option value="high">High</option>
@@ -29,6 +29,28 @@ function renderForm() {
 const clearTodo = () => {
   section.innerHTML = '';
 };
+
+function addDetails(parent, date, description) {
+  const detailSection = document.createElement('div');
+  detailSection.classList.add('row', 'col-12', 'details-section');
+  const dueDate = document.createElement('p');
+  const listIcon1 = document.createElement('i');
+  listIcon1.classList.add('fa', 'fa-chevron-right');
+  const due = document.createElement('span');
+  due.textContent = `Due Date: ${date}`;
+  const descriptionSection = document.createElement('p');
+  const listIcon2 = document.createElement('i');
+  listIcon2.classList.add('fa', 'fa-chevron-right');
+  const desc = document.createElement('span');
+  desc.textContent = `Description: ${description}`;
+  dueDate.append(listIcon1);
+  dueDate.append(due);
+  descriptionSection.append(listIcon2);
+  descriptionSection.append(desc);
+  detailSection.append(dueDate);
+  detailSection.append(descriptionSection);
+  parent.append(detailSection);
+}
 
 function renderTodoList(project) {
   const todo = project.todoList;
@@ -69,29 +91,7 @@ function renderTodoList(project) {
     todoIcons.append(icon4);
     addDetails(todoItem, todo.due, todo.description);
     projectsDiv.append(todoItem);
-
   });
-}
-function addDetails(parent, date, description) {
-  const detailSection = document.createElement('div');
-  detailSection.classList.add('row', 'col-12', 'details-section');
-  const dueDate = document.createElement('p');
-  const listIcon1 = document.createElement('i');
-  listIcon1.classList.add('fa', 'fa-chevron-right');
-  const due = document.createElement('span');
-  due.textContent = `Due Date: ${date}`;
-  const descriptionSection = document.createElement('p');
-  const listIcon2 = document.createElement('i');
-  listIcon2.classList.add('fa', 'fa-chevron-right');
-  const desc = document.createElement('span');
-  desc.textContent = `Description: ${description}`;
-  dueDate.append(listIcon1);
-  dueDate.append(due);
-  descriptionSection.append(listIcon2);
-  descriptionSection.append(desc);
-  detailSection.append(dueDate);
-  detailSection.append(descriptionSection);
-  parent.append(detailSection);
 }
 
 function getTodoInfo() {
@@ -118,14 +118,11 @@ function toggleForm() {
   document.querySelector('.todo-form').classList.toggle('hidden');
 }
 
-export { getTodoInfo, clearTodo, renderTodoSection, renderTodoList, toggleForm };
+function resetForm() {
+  const form = document.querySelector('.new-form');
+  form.reset();
+}
 
-// function renderDetails() {
-//   const { todoTitle, description, due, priority } = todo;
-//   const section = document.querySelector('.todo-section');
-//   const todoDiv = document.createElement('div');
-//   const title = document.createElement('h3');
-//   title.textContent = todoTitle;
-//   todoDiv.append(title);
-//   section.append(todoDiv);
-// }
+export {
+  getTodoInfo, clearTodo, renderTodoSection, renderTodoList, toggleForm, resetForm,
+};
