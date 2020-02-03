@@ -1,5 +1,3 @@
-import dom from './domStrings';
-
 function clearList(parentNode) {
   while (parentNode.firstChild) {
     parentNode.removeChild(parentNode.firstChild);

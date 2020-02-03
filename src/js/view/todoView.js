@@ -1,5 +1,3 @@
-import dom from "./domStrings";
-
 const section = document.querySelector('.todo-section');
 
 function renderHead() {
@@ -111,7 +109,9 @@ function getTodoInfo() {
 }
 
 function validateForm(todo) {
-  const { title, due, priority, description } = todo;
+  const {
+    title, due, priority, description,
+  } = todo;
   const message = document.querySelector('.alert-message');
   if (title === '' || due === '' || priority === '' || description === '') {
     message.classList.remove('hidden');
@@ -165,10 +165,9 @@ function resetForm() {
 
 function toggleDetails(id) {
   document.getElementById(`detail-section-${id}`).classList.toggle('hidden');
-
 }
 
 export {
   getTodoInfo, clearTodo, renderTodoSection, renderTodoList,
-  toggleForm, resetForm, setTodoInfo, toggleEditBtn, updateTodoInfo, toggleDetails, validateForm
+  toggleForm, resetForm, setTodoInfo, toggleEditBtn, updateTodoInfo, toggleDetails, validateForm,
 };

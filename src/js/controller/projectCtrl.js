@@ -51,10 +51,10 @@ function findProject(id) {
 
 function validateInput(element) {
   if (element.value === '') {
-    //element.classList.add('alert');
+    // element.classList.add('alert');
     return false;
   }
-  //element.classList.remove('alert');
+  // element.classList.remove('alert');
   return true;
 }
 export {

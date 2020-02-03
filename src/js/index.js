@@ -1,7 +1,9 @@
 import '../css/style.scss';
 import Project from './model/project';
-import { addProject, updateProjects, generateID, getProjectArr, updateLocalStorage, deleteProject, findProject, validateInput } from './controller/projectCtrl';
-import TodoItem from './model/todo';
+import {
+  addProject, updateProjects, generateID, getProjectArr,
+  updateLocalStorage, deleteProject, findProject, validateInput,
+} from './controller/projectCtrl';
 import { renderProject, clearInput, selectedProject } from './view/projectView';
 import * as todoListCtrl from './controller/todoListCtrl';
 import dom from './view/domStrings';
@@ -10,8 +12,6 @@ import {
   updateTodoInfo, setTodoInfo, toggleEditBtn, validateForm,
 } from './view/todoView';
 
-
-// OK
 function createProject(title) {
   const ID = generateID(getProjectArr());
   const p = Project(title, ID);
@@ -37,7 +37,6 @@ function createTodo(projectID) {
     renderTodoList(updatedProject);
     resetForm();
   }
-
 }
 
 const mainController = (() => {
