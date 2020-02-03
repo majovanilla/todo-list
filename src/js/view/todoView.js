@@ -34,9 +34,10 @@ const clearTodo = () => {
   section.innerHTML = '';
 };
 
-function addDetails(parent, date, description) {
+function addDetails(parent, date, description, id) {
   const detailSection = document.createElement('div');
-  detailSection.classList.add('row', 'col-12', 'details-section');
+  detailSection.classList.add('row', 'col-12', 'details-section', 'hidden');
+  detailSection.setAttribute('id', `detail-section-${id}`);
   const dueDate = document.createElement('p');
   const listIcon1 = document.createElement('i');
   listIcon1.classList.add('fa', 'fa-chevron-right');
@@ -78,6 +79,7 @@ function renderTodoList(project) {
     icon3.classList.add('fa', 'fa-pencil', 'edit-icon');
     icon3.setAttribute('id', `edit-${todo.id}-${project.id}`);
     icon4.classList.add('fa', 'fa-caret-down', 'details-icon');
+    icon4.setAttribute('id', `details-${todo.id}`);
     const title = document.createElement('span');
     title.textContent = todo.title;
     const priority = document.createElement('span');
@@ -93,7 +95,7 @@ function renderTodoList(project) {
     todoIcons.append(icon2);
     todoIcons.append(icon3);
     todoIcons.append(icon4);
-    addDetails(todoItem, todo.due, todo.description);
+    addDetails(todoItem, todo.due, todo.description, todo.id);
     projectsDiv.append(todoItem);
   });
 }
@@ -148,7 +150,12 @@ function resetForm() {
   form.reset();
 }
 
+function toggleDetails(id) {
+  document.getElementById(`detail-section-${id}`).classList.toggle('hidden');
+
+}
+
 export {
   getTodoInfo, clearTodo, renderTodoSection, renderTodoList,
-  toggleForm, resetForm, setTodoInfo, toggleEditBtn, updateTodoInfo,
+  toggleForm, resetForm, setTodoInfo, toggleEditBtn, updateTodoInfo, toggleDetails,
 };

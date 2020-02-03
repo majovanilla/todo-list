@@ -6,7 +6,7 @@ import { renderProject, clearInput, selectedProject } from './view/projectView';
 import * as todoListCtrl from './controller/todoListCtrl';
 import dom from './view/domStrings';
 import {
-  renderTodoSection, getTodoInfo, renderTodoList, clearTodo, toggleForm, resetForm, updateTodoInfo, setTodoInfo, toggleEditBtn,
+  renderTodoSection, getTodoInfo, renderTodoList, clearTodo, toggleForm, resetForm, toggleDetails, updateTodoInfo, setTodoInfo, toggleEditBtn,
 } from './view/todoView';
 
 
@@ -36,7 +36,6 @@ function createTodo(projectID) {
   resetForm();
 }
 
-// OK
 const mainController = (() => {
   const addNewProject = (e) => {
     if (e.key === 'Enter') {
@@ -45,7 +44,6 @@ const mainController = (() => {
     }
   };
 
-  //OK
   const projectClick = (projectId) => {
     const project = findProject(projectId);
     clearTodo();
@@ -54,7 +52,6 @@ const mainController = (() => {
     renderTodoList(project);
   };
 
-  //OK
   const projectDelete = (id) => {
     const ID = parseInt(id, 10);
     deleteProject(ID);
@@ -82,6 +79,9 @@ const mainController = (() => {
       todoListCtrl.deleteTodo(project, project.todoList.indexOf(todo));
       updateLocalStorage();
       renderTodoList(project);
+    } else if (id.match(/details-\d+/)) {
+      console.log(todoID);
+      toggleDetails(todoID);
     }
   };
 
