@@ -85,7 +85,6 @@ const mainController = (() => {
       updateLocalStorage();
       renderTodoList(project);
     } else if (id.match(/details-\d+/)) {
-      console.log(todoID);
       toggleDetails(todoID);
     }
   };
