@@ -6,7 +6,7 @@ import { renderProject, clearInput, selectedProject } from './view/projectView';
 import * as todoListCtrl from './controller/todoListCtrl';
 import dom from './view/domStrings';
 import {
-  renderTodoSection, getTodoInfo, renderTodoList, clearTodo, toggleForm, resetForm, editTodo,
+  renderTodoSection, getTodoInfo, renderTodoList, clearTodo, toggleForm, resetForm, updateTodoInfo, setTodoInfo, toggleEditBtn,
 } from './view/todoView';
 
 
@@ -75,11 +75,27 @@ const mainController = (() => {
     const project = findProject(projectID);
     const todo = project.todoList[todoID];
     if (id.match(/edit-\d+/)) {
-      editTodo(todo);
-
-    } else if (id.match(/delete-\d+/g)) {
-      // deleteTodo();
+      toggleForm();
+      setTodoInfo(todo);
+      toggleEditBtn();
+    } else if (id.match(/delete-\d+/)) {
+      todoListCtrl.deleteTodo(project, project.todoList.indexOf(todo));
+      updateLocalStorage();
+      renderTodoList(project);
     }
+  };
+
+  const editBtnTodo = () => {
+    const selectedProject = document.querySelector('.selected');
+    const projectID = parseInt(selectedProject.id, 10);
+    const todoID = document.getElementById('id').value;
+    const project = findProject(projectID);
+    const todo = project.todoList[todoID];
+    updateTodoInfo(todo);
+    updateLocalStorage();
+    toggleEditBtn();
+    toggleForm();
+    renderTodoList(findProject(projectID));
   };
 
   const eventHandler = () => {
@@ -92,8 +108,9 @@ const mainController = (() => {
         projectID = e.target.parentNode.firstChild.id;
         projectDelete(projectID);
       }
-      document.querySelector('.new-todo').addEventListener('click', toggleForm('add'));
+      document.querySelector('.new-todo').addEventListener('click', toggleForm);
       document.getElementById('add-todo').addEventListener('click', addNewTodo);
+      document.getElementById('edit-todo').addEventListener('click', editBtnTodo);
       document.querySelector('.todo-list').addEventListener('click', todoIconManager);
     });
   };

@@ -16,35 +16,19 @@ function renderForm() {
                             <input type="text" id="todoTitle" placeholder="Enter title"><br>
                             <input type="date" id="todoDue"><br>
                             <select id="priority" name="priority">
-                              <option value="urgent">Urgent</option>
-                              <option value="high">High</option>
-                              <option value="normal">Normal</option>
-                              <option value="low">Low</option>
+                            <option value="urgent">Urgent</option>
+                            <option value="high">High</option>
+                            <option value="normal">Normal</option>
+                            <option value="low">Low</option>
                             </select><br>
                             <textarea id="todoDescription" rows="3" cols="30" placeholder="Add description"></textarea><br>
+                            <input type="hidden" id="id" value="null"><br>
                             <button type="button" class="btn-lg btn-success" id="add-todo">Add</button>
+                            <button type="button" class="btn-lg btn-success hidden" id="edit-todo">Edit</button>
                           </form>
                         </div>`;
   return todoForm;
 }
-
-// function renderEditForm() {
-//   const todoForm = `<div class=" row edit-todo-form hidden">
-//                           <form class="new-form">
-//                             <input type="text" id="todoTitle" placeholder="Enter title"><br>
-//                             <input type="date" id="todoDue"><br>
-//                             <select id="priority" name="priority">
-//                               <option value="urgent">Urgent</option>
-//                               <option value="high">High</option>
-//                               <option value="normal">Normal</option>
-//                               <option value="low">Low</option>
-//                             </select><br>
-//                             <textarea id="todoDescription" rows="3" cols="30" placeholder="Add description"></textarea><br>
-//                             <button type="button" class="btn-lg btn-success" id="add-todo">Edit</button>
-//                           </form>
-//                         </div>`;
-//   section.append(todoForm);
-// }
 
 const clearTodo = () => {
   section.innerHTML = '';
@@ -90,7 +74,7 @@ function renderTodoList(project) {
     todoIcons.classList.add('todo-icons', 'col-3');
     icon1.classList.add('fa', 'fa-chevron-right');
     icon2.classList.add('fa', 'fa-window-close', 'delete-icon');
-    icon2.setAttribute('id', `delete-${todo.id}`);
+    icon2.setAttribute('id', `delete-${todo.id}-${project.id}`);
     icon3.classList.add('fa', 'fa-pencil', 'edit-icon');
     icon3.setAttribute('id', `edit-${todo.id}-${project.id}`);
     icon4.classList.add('fa', 'fa-caret-down', 'details-icon');
@@ -126,10 +110,19 @@ function getTodoInfo() {
 
 function setTodoInfo(todo) {
   document.querySelector('#todoTitle').value = todo.title;
-  document.querySelector('#todoDue').value = todo.todoDue;
+  document.querySelector('#todoDue').value = todo.due;
   document.querySelector('#priority').value = todo.priority;
   document.querySelector('#todoDescription').value = todo.description;
-};
+  document.querySelector('#id').value = todo.id;
+}
+
+function updateTodoInfo(todo) {
+  todo.title = document.querySelector('#todoTitle').value;
+  todo.due = document.querySelector('#todoDue').value;
+  todo.priority = document.querySelector('#priority').value;
+  todo.description = document.querySelector('#todoDescription').value;
+  todo.id = document.querySelector('#id').value;
+}
 
 function renderTodoSection() {
   const a = renderHead();
@@ -145,15 +138,9 @@ function toggleForm() {
   document.querySelector('.todo-form').classList.toggle('hidden');
 }
 
-function toggleEditForm() {
-  document.querySelector('.edit-todo-form').classList.toggle('hidden');
-}
-
-function loadFormData(todo) {
-  // toggleForm();
-  // renderEditForm();
-  // toggleEditForm();
-  setTodoInfo(todo);
+function toggleEditBtn() {
+  document.getElementById('add-todo').classList.toggle('hidden');
+  document.getElementById('edit-todo').classList.toggle('hidden');
 }
 
 function resetForm() {
@@ -161,11 +148,7 @@ function resetForm() {
   form.reset();
 }
 
-function editTodo(todo) {
-  loadFormData(todo);
-
-}
-
 export {
-  getTodoInfo, clearTodo, renderTodoSection, renderTodoList, toggleForm, resetForm, editTodo,
+  getTodoInfo, clearTodo, renderTodoSection, renderTodoList,
+  toggleForm, resetForm, setTodoInfo, toggleEditBtn, updateTodoInfo,
 };
