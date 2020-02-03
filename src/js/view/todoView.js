@@ -11,18 +11,18 @@ function renderHead() {
 }
 
 function renderForm() {
-  const todoForm = `<div class=" row todo-form hidden">
+  const todoForm = `<p class= "hidden alert-message">Please fill up all the input fields.</p><div class=" row todo-form hidden">
                           <form class="new-form">
-                            <input type="text" id="todoTitle" placeholder="Enter title"><br>
-                            <input type="date" id="todoDue"><br>
-                            <select id="priority" name="priority">
+                            <input type="text" id="todoTitle" placeholder="Enter title" required/><br>
+                            <input type="date" id="todoDue" required/><br>
+                            <select id="priority" name="priority" required/>
                             <option value="urgent">Urgent</option>
                             <option value="high">High</option>
                             <option value="normal">Normal</option>
                             <option value="low">Low</option>
                             </select><br>
-                            <textarea id="todoDescription" rows="3" cols="30" placeholder="Add description"></textarea><br>
-                            <input type="hidden" id="id" value="null"><br>
+                            <textarea id="todoDescription" rows="3" cols="30" placeholder="Add description" required></textarea><br>
+                            <input type="hidden" id="id" value="null"/><br>
                             <button type="button" class="btn-lg btn-success" id="add-todo">Add</button>
                             <button type="button" class="btn-lg btn-success hidden" id="edit-todo">Edit</button>
                           </form>
@@ -110,6 +110,19 @@ function getTodoInfo() {
   return todo;
 }
 
+function validateForm(todo) {
+  const { title, due, priority, description } = todo;
+  const message = document.querySelector('.alert-message');
+  if (title === '' || due === '' || priority === '' || description === '') {
+    message.classList.remove('hidden');
+    return false;
+  }
+  if (!message.classList.contains('hidden')) {
+    message.classList.add('hidden');
+  }
+  return true;
+}
+
 function setTodoInfo(todo) {
   document.querySelector('#todoTitle').value = todo.title;
   document.querySelector('#todoDue').value = todo.due;
@@ -157,5 +170,5 @@ function toggleDetails(id) {
 
 export {
   getTodoInfo, clearTodo, renderTodoSection, renderTodoList,
-  toggleForm, resetForm, setTodoInfo, toggleEditBtn, updateTodoInfo, toggleDetails,
+  toggleForm, resetForm, setTodoInfo, toggleEditBtn, updateTodoInfo, toggleDetails, validateForm
 };

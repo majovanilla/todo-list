@@ -1,12 +1,13 @@
 import '../css/style.scss';
 import Project from './model/project';
-import { addProject, updateProjects, generateID, getProjectArr, updateLocalStorage, deleteProject, findProject } from './controller/projectCtrl';
+import { addProject, updateProjects, generateID, getProjectArr, updateLocalStorage, deleteProject, findProject, validateInput } from './controller/projectCtrl';
 import TodoItem from './model/todo';
 import { renderProject, clearInput, selectedProject } from './view/projectView';
 import * as todoListCtrl from './controller/todoListCtrl';
 import dom from './view/domStrings';
 import {
-  renderTodoSection, getTodoInfo, renderTodoList, clearTodo, toggleForm, resetForm, toggleDetails, updateTodoInfo, setTodoInfo, toggleEditBtn,
+  renderTodoSection, getTodoInfo, renderTodoList, clearTodo, toggleForm, resetForm, toggleDetails,
+  updateTodoInfo, setTodoInfo, toggleEditBtn, validateForm,
 } from './view/todoView';
 
 
@@ -26,21 +27,26 @@ function createTodo(projectID) {
   const projectIndex = projects.indexOf(project);
   const ID = generateID(project.todoList);
   const todo = getTodoInfo();
-  todo.id = ID;
-  todoListCtrl.addTodo(projects, projectIndex, todo);
-  updateLocalStorage();
-  toggleForm();
-  const updatedProjects = getProjectArr();
-  const updatedProject = updatedProjects.find(element => element.id === projectID);
-  renderTodoList(updatedProject);
-  resetForm();
+  if (validateForm(todo)) {
+    todo.id = ID;
+    todoListCtrl.addTodo(projects, projectIndex, todo);
+    updateLocalStorage();
+    toggleForm();
+    const updatedProjects = getProjectArr();
+    const updatedProject = updatedProjects.find(element => element.id === projectID);
+    renderTodoList(updatedProject);
+    resetForm();
+  }
+
 }
 
 const mainController = (() => {
   const addNewProject = (e) => {
     if (e.key === 'Enter') {
-      const projectTitle = dom.newProject.value;
-      createProject(projectTitle);
+      const projectTitle = dom.newProject;
+      if (validateInput(projectTitle)) {
+        createProject(projectTitle.value);
+      }
     }
   };
 

@@ -49,7 +49,15 @@ function findProject(id) {
   return projects[index];
 }
 
+function validateInput(element) {
+  if (element.value === '') {
+    //element.classList.add('alert');
+    return false;
+  }
+  //element.classList.remove('alert');
+  return true;
+}
 export {
   addProject, getProjectArr, generateID, updateProjects, deleteProject,
-  editProject, updateLocalStorage, findProject,
+  editProject, updateLocalStorage, findProject, validateInput,
 };

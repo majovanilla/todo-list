@@ -49,7 +49,7 @@
 }
 
 .selected {
-  background-color: green;
+  color: #fff;
 }
 
 // todo details section
@@ -78,6 +78,10 @@
 
 
 // new form will be hidden
+.alert-message {
+  color: red;
+  font-weight: 400;
+}
 .new-form {
   margin: auto;
   padding: 10px;
