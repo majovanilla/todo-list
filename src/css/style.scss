@@ -1,0 +1,171 @@
+@import './scss/reset';
+
+.project-section {
+  padding: 50px 30px;
+  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+  background-image: linear-gradient(to right, rgb(129, 206, 202), rgb(97, 218, 137));
+  min-height: 100vh;
+  align-content: flex-start;
+
+}
+
+.section-head {
+  font-size: 30px;
+  font-weight: 700;
+  color:#000;
+  margin-bottom: 10px;
+}
+
+.add-project {
+  border: none;
+  border-bottom: 2px, solid,rgb(154, 198, 236);
+  border-bottom: solid;
+  font-size: 16px;
+  height: 30px;
+  margin-bottom: 15px;
+  padding: 8px;
+}
+
+.project {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: start;
+  border-top: 2px solid aliceblue;
+  padding: 10px 0;
+  padding-left: 20px;
+}
+
+.project-title {
+  width: inherit;
+  overflow: hidden;
+  font-size: 1.5rem;
+  font-weight: bold;
+}
+
+.project-title:hover {
+  transform: scale(1.2);
+  transition: ease-in-out;
+}
+
+.selected {
+  color: #fff;
+}
+
+// todo details section
+.todo-section {
+  margin-left: 40px;
+  padding: 30px;
+  background-image: linear-gradient(to left bottom, rgb(129, 206, 202), rgb(97, 218, 137));
+
+}
+.todo-head {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 10px;
+}
+.todo-head p {
+  color: rgb(87, 182, 123);
+}
+
+.todo-head p:hover {
+  transform: scale(1.3);
+  transition: ease-in-out;
+}
+
+
+// new form will be hidden
+.alert-message {
+  color: red;
+  font-weight: 400;
+}
+.new-form {
+  margin: auto;
+  padding: 10px;
+
+}
+.new-form input,
+.new-form textarea {
+  margin: 10px;
+  margin-left: 0;
+  padding: 5px;
+  border: none;
+  border-bottom: 2px solid;
+}
+.todo-list {
+  color: rgb(40, 138, 97);
+}
+
+.todo-title {
+  flex-direction: row;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.todo-title:hover {
+  transform: scale(1.1);
+  transition: ease-out;
+}
+
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #fff;
+  padding: 0 20px;
+  position: relative;
+}
+.todo-item:hover {
+  cursor: pointer;
+}
+
+.todo-item .priority-status {
+  visibility: hidden;
+  width: 150px;
+  background-color: rgb(20, 189, 132);
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 7px 0;
+  position: absolute;
+  z-index: 1;
+  top: -20px;
+}
+
+.todo-item:hover .priority-status {
+  visibility: visible;
+}
+.todo-icons > i {
+  padding: 0 10px;
+}
+
+i {
+  padding: 5px;
+}
+
+.delete-icon:hover,
+.edit-icon:hover,
+.details-icon:hover {
+  transform: scale(2);
+}
+
+.hidden {
+  display: none !important;
+}
+
+.details-section {
+  display: flex;
+  flex-direction: column;
+}
+// footer section
+
+.footer-section {
+  padding: 10px;
+  background-color:black;
+  color:#fff;
+  position: sticky;
+}
