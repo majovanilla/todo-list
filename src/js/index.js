@@ -12,6 +12,7 @@ import {
   updateTodoInfo, setTodoInfo, toggleEditBtn, validateForm,
 } from './view/todoView';
 
+
 function createProject(title) {
   const ID = generateID(getProjectArr());
   const p = Project(title, ID);

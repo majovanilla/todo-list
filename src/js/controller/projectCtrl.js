@@ -1,4 +1,4 @@
-let projects = [];
+let projects = [{ title: 'Default project', id: 0, todoList: [] }];
 
 function updateProjects() {
   const localStorageArr = JSON.parse(localStorage.getItem('projects'));
@@ -51,12 +51,13 @@ function findProject(id) {
 
 function validateInput(element) {
   if (element.value === '') {
-    // element.classList.add('alert');
     return false;
   }
-  // element.classList.remove('alert');
   return true;
 }
+
+updateLocalStorage();
+
 export {
   addProject, getProjectArr, generateID, updateProjects, deleteProject,
   editProject, updateLocalStorage, findProject, validateInput,
