@@ -56,8 +56,6 @@ function validateInput(element) {
   return true;
 }
 
-updateLocalStorage();
-
 export {
   addProject, getProjectArr, generateID, updateProjects, deleteProject,
   editProject, updateLocalStorage, findProject, validateInput,

@@ -4,14 +4,13 @@ import {
   addProject, updateProjects, generateID, getProjectArr,
   updateLocalStorage, deleteProject, findProject, validateInput,
 } from './controller/projectCtrl';
-import { renderProject, clearInput, selectedProject } from './view/projectView';
+import { renderProject, clearInput, selectedProject, renderNav } from './view/projectView';
 import * as todoListCtrl from './controller/todoListCtrl';
 import dom from './view/domStrings';
 import {
   renderTodoSection, getTodoInfo, renderTodoList, clearTodo, toggleForm, resetForm, toggleDetails,
   updateTodoInfo, setTodoInfo, toggleEditBtn, validateForm,
 } from './view/todoView';
-
 
 function createProject(title) {
   const ID = generateID(getProjectArr());
@@ -54,7 +53,7 @@ const mainController = (() => {
     const project = findProject(projectId);
     clearTodo();
     selectedProject(projectId);
-    renderTodoSection();
+    renderTodoSection(project.title);
     renderTodoList(project);
   };
 
@@ -121,7 +120,7 @@ const mainController = (() => {
   };
   return { eventHandler };
 })();
-
+renderNav();
 updateProjects();
 renderProject();
 mainController.eventHandler();

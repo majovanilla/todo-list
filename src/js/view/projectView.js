@@ -1,3 +1,5 @@
+import dom from './domStrings';
+
 function clearList(parentNode) {
   while (parentNode.firstChild) {
     parentNode.removeChild(parentNode.firstChild);
@@ -8,10 +10,24 @@ function clearInput(domElement) {
   domElement.value = '';
 }
 
+const limitTitle = (title, limit = 30) => {
+  const newTitle = [];
+  if (title.length > limit) {
+    title.split(' ').reduce((acc, current) => {
+      if (acc + current.length <= limit) {
+        newTitle.push(current);
+      }
+      return acc + current.length;
+    }, 0);
+    //return the result
+    return `${newTitle.join(' ')} ...`;
+  }
+  return title;
+};
+
 function renderProject() {
   const projectsArr = JSON.parse(localStorage.getItem('projects'));
   const section = document.querySelector('.project-list');
-  section.classList.add('row');
   clearList(section);
   if (projectsArr !== null) {
     projectsArr.forEach((project) => {
@@ -20,7 +36,7 @@ function renderProject() {
       const h2 = document.createElement('h2');
       h2.classList.add('project-title');
       h2.setAttribute('id', project.id);
-      h2.textContent = project.title;
+      h2.textContent = limitTitle(project.title);
       const deleteIcon = document.createElement('i');
       deleteIcon.classList.add('fa', 'fa-window-close', 'project-delete-icon');
       projectDiv.append(h2);
@@ -29,6 +45,7 @@ function renderProject() {
     });
   }
 }
+
 
 const selectedProject = (projectId) => {
   const previousProject = document.querySelector('.selected');
@@ -40,4 +57,13 @@ const selectedProject = (projectId) => {
   h2.classList.add('selected');
 };
 
-export { clearInput, renderProject, selectedProject };
+const renderNav = () => {
+  const markup = `<ul class="navbar">
+  <li><img src="img/logo.png" alt="logo of the app"></li>
+  <li>Suman Shreshtha</li> 
+  <li><span>LogOut</span></li>
+</ul>`;
+  dom.mainnav.insertAdjacentHTML('afterbegin', markup);
+};
+
+export { clearInput, renderProject, selectedProject, renderNav, limitTitle };

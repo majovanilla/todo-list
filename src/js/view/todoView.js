@@ -1,10 +1,15 @@
+import { limitTitle } from './projectView';
+
 const section = document.querySelector('.todo-section');
 
-function renderHead() {
-  const todoHead = `<div class="col-12 todo-head">
-                        <h2 class="todo-head">List of TODOs</h2>
+function renderHead(title) {
+  const todoHead = `<div class="col-12">
+                      <h2 class="project-header">${title}</h2>
+                      <div class="todo-head">
+                        <h2>TODOs</h2>
                         <p><i class="fa fa-plus-circle new-todo"></i></p>
-                      </div>`;
+                      </div>
+                    </div>`;
   return todoHead;
 }
 
@@ -21,8 +26,8 @@ function renderForm() {
                             </select><br>
                             <textarea id="todoDescription" rows="3" cols="30" placeholder="Add description" required></textarea><br>
                             <input type="hidden" id="id" value="null"/><br>
-                            <button type="button" class="btn-lg btn-success" id="add-todo">Add</button>
-                            <button type="button" class="btn-lg btn-success hidden" id="edit-todo">Edit</button>
+                            <input type="button" class="btn-success" id="add-todo" value="Add">
+                            <input type="button" class="btn-success hidden" id="edit-todo" value="Edit">
                           </form>
                         </div>`;
   return todoForm;
@@ -32,9 +37,29 @@ const clearTodo = () => {
   section.innerHTML = '';
 };
 
+function priorityColor(priority) {
+
+  let color;
+  switch (priority) {
+    case 'urgent':
+      color = '#f58276';
+      break;
+    case 'high':
+      color = '#f5c276';
+      break;
+    case 'low':
+      color = '#b1b3b2';
+      break;
+    default:
+      color = '#76f5f1';
+      break;
+  }
+  return color;
+}
+
 function addDetails(parent, date, description, id) {
   const detailSection = document.createElement('div');
-  detailSection.classList.add('row', 'col-12', 'details-section', 'hidden');
+  detailSection.classList.add('details-section', 'hidden');
   detailSection.setAttribute('id', `detail-section-${id}`);
   const dueDate = document.createElement('p');
   const listIcon1 = document.createElement('i');
@@ -62,34 +87,34 @@ function renderTodoList(project) {
   todo.forEach(todo => {
     const todoItem = document.createElement('div');
     const todoTitle = document.createElement('div');
-    todoItem.classList.add('todo-item', 'row', 'my-3');
-    todoItem.setAttribute('id', todo.id);
-    todoTitle.classList.add('todo-title', 'col-8');
+    const visibleTodo = document.createElement('div');
+    todoItem.classList.add('todo-item');
+    visibleTodo.classList.add('visible-todo-item');
+    todoItem.setAttribute('id', `${todo.id}-${project.id}`);
+    todoTitle.classList.add('todo-title');
     const todoIcons = document.createElement('div');
     const icon1 = document.createElement('i');
     const icon2 = document.createElement('i');
     const icon3 = document.createElement('i');
     const icon4 = document.createElement('i');
-    todoIcons.classList.add('todo-icons', 'col-3');
-    icon1.classList.add('fa', 'fa-chevron-right');
+    todoIcons.classList.add('todo-icons');
+    icon1.classList.add('fa', 'fa-minus-circle');
+    icon1.style.color = todo.status === true ? '#07a631' : '#acadac';
     icon2.classList.add('fa', 'fa-window-close', 'delete-icon');
-    icon2.setAttribute('id', `delete-${todo.id}-${project.id}`);
     icon3.classList.add('fa', 'fa-pencil', 'edit-icon');
-    icon3.setAttribute('id', `edit-${todo.id}-${project.id}`);
     icon4.classList.add('fa', 'fa-caret-down', 'details-icon');
     icon4.setAttribute('id', `details-${todo.id}`);
     const title = document.createElement('span');
-    title.textContent = todo.title;
-    const priority = document.createElement('span');
-    priority.classList.add('priority-status');
+    title.textContent = limitTitle(todo.title, 30);
+    const priority = document.createElement('div');
     priority.textContent = todo.priority;
+    priority.style.color = priorityColor(todo.priority);
     todoTitle.append(icon1);
     todoTitle.append(title);
-    todoItem.appendChild(priority);
-    todoTitle.append(icon1);
-    todoTitle.append(title);
-    todoItem.append(todoTitle);
-    todoItem.append(todoIcons);
+    todoItem.appendChild(visibleTodo);
+    visibleTodo.append(todoTitle);
+    visibleTodo.append(priority);
+    visibleTodo.append(todoIcons);
     todoIcons.append(icon2);
     todoIcons.append(icon3);
     todoIcons.append(icon4);
@@ -139,8 +164,8 @@ function updateTodoInfo(todo) {
   todo.id = document.querySelector('#id').value;
 }
 
-function renderTodoSection() {
-  const a = renderHead();
+function renderTodoSection(title) {
+  const a = renderHead(title);
   section.insertAdjacentHTML('afterbegin', a);
   const b = renderForm();
   section.insertAdjacentHTML('beforeend', b);
@@ -171,3 +196,4 @@ export {
   getTodoInfo, clearTodo, renderTodoSection, renderTodoList,
   toggleForm, resetForm, setTodoInfo, toggleEditBtn, updateTodoInfo, toggleDetails, validateForm,
 };
+

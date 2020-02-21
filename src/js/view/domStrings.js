@@ -13,6 +13,7 @@ const dom = {
   newTodoBtn: document.getElementById('add-todo'),
   deleteTodo: document.querySelector('.delete-icon'),
   editTodo: document.querySelector('.edit-icon'),
+  mainnav: document.querySelector('.main-nav'),
 };
 
 export default dom;
