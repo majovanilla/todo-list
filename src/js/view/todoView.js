@@ -26,8 +26,8 @@ function renderForm() {
                             </select><br>
                             <textarea id="todoDescription" rows="3" cols="30" placeholder="Add description" required></textarea><br>
                             <input type="hidden" id="id" value="null"/><br>
-                            <input type="button" class="btn-success" id="add-todo" value="Add">
-                            <input type="button" class="btn-success hidden" id="edit-todo" value="Edit">
+                            <input type="button" class="btn-success add-todo" value="Add">
+                            <input type="button" class="btn-success hidden edit-todo" value="Edit">
                           </form>
                         </div>`;
   return todoForm;
@@ -133,17 +133,14 @@ function getTodoInfo() {
   };
 }
 
-function validateForm(todo) {
-  const {
-    title, due, priority, description,
-  } = todo;
+function validateForm(title, due, priority, description) {
   const message = document.querySelector('.alert-message');
   if (title === '' || due === '' || priority === '' || description === '') {
     message.classList.remove('hidden');
+    setTimeout(() => {
+      message.classList.add('hidden');
+    }, 2000);
     return false;
-  }
-  if (!message.classList.contains('hidden')) {
-    message.classList.add('hidden');
   }
   return true;
 }
@@ -197,4 +194,3 @@ export {
   getTodoInfo, clearTodo, renderTodoSection, renderTodoList,
   toggleForm, resetForm, setTodoInfo, toggleEditBtn, updateTodoInfo, toggleDetails, validateForm,
 };
-

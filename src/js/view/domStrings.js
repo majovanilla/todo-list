@@ -14,6 +14,7 @@ const dom = {
   deleteTodo: document.querySelector('.delete-icon'),
   editTodo: document.querySelector('.edit-icon'),
   mainnav: document.querySelector('.main-nav'),
+  todoHeader: document.querySelector('.todo-header-section'),
 };
 
 export default dom;

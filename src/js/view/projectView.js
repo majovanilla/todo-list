@@ -33,10 +33,10 @@ function renderProject() {
     projectsArr.forEach((project) => {
       const projectDiv = document.createElement('div');
       projectDiv.classList.add('project', 'col-12');
+      projectDiv.setAttribute('id', project.id);
       const h2 = document.createElement('h2');
       h2.classList.add('project-title');
-      h2.setAttribute('id', project.id);
-      h2.textContent = limitTitle(project.title);
+      h2.textContent = limitTitle(project.title, 25);
       const deleteIcon = document.createElement('i');
       deleteIcon.classList.add('fa', 'fa-window-close', 'project-delete-icon');
       projectDiv.append(h2);

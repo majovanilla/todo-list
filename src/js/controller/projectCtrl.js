@@ -34,8 +34,7 @@ function updateLocalStorage() {
 
 function findProject(id) {
   updateProjects();
-  const ids = projects.map(current => current.id);
-  const index = ids.indexOf(parseInt(id, 10));
+  const index = projects.findIndex(current => current.id === id);
   return projects[index];
 }
 
