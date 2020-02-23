@@ -66,16 +66,16 @@ const mainController = (() => {
 
   const addNewTodo = () => {
     const selectedProject = document.querySelector('.selected').id;
-    console.log(selectedProject);
     createTodo(selectedProject);
   };
 
   const editBtnTodo = () => {
-    const selectedProject = document.querySelector('.selected');
-    const projectID = parseInt(selectedProject.id, 10);
+    const projectID = document.querySelector('.selected').id;
     const todoID = document.getElementById('id').value;
     const project = findProject(projectID);
-    const todo = project.todoList[todoID];
+    console.log(project);
+    const todo = project.todoList.find(ele => ele.id === todoID);
+    console.log(todo);
     updateTodoInfo(todo);
     updateLocalStorage();
     toggleEditBtn();
@@ -122,6 +122,7 @@ const mainController = (() => {
         updateLocalStorage();
         renderTodoList(project);
       } else if (e.target.matches('.edit-icon')) {
+        console.log('working');
         toggleForm();
         setTodoInfo(todo);
         toggleEditBtn();

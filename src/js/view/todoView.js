@@ -173,8 +173,8 @@ function toggleForm() {
 }
 
 function toggleEditBtn() {
-  document.getElementById('add-todo').classList.toggle('hidden');
-  document.getElementById('edit-todo').classList.toggle('hidden');
+  document.querySelector('.add-todo').classList.toggle('hidden');
+  document.querySelector('.edit-todo').classList.toggle('hidden');
 }
 
 function resetForm() {
