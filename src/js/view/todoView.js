@@ -1,6 +1,6 @@
 import { limitTitle } from './projectView';
 
-const section = document.querySelector('.todo-section');
+const section = document.querySelector('.todo-header-section');
 
 function renderHead(title) {
   const todoHead = `<div class="col-12">
@@ -82,15 +82,16 @@ function addDetails(parent, date, description, id) {
 
 function renderTodoList(project) {
   const todo = project.todoList;
-  const projectsDiv = document.querySelector('.todo-list');
+  const projectsDiv = document.querySelector('.todo-lists');
   projectsDiv.innerHTML = '';
   todo.forEach(todo => {
     const todoItem = document.createElement('div');
     const todoTitle = document.createElement('div');
     const visibleTodo = document.createElement('div');
     todoItem.classList.add('todo-item');
+    todoItem.style.color = priorityColor(todo.priority);
+    todoItem.setAttribute('data-info', `${todo.id}-${project.id}`);
     visibleTodo.classList.add('visible-todo-item');
-    todoItem.setAttribute('id', `${todo.id}-${project.id}`);
     todoTitle.classList.add('todo-title');
     const todoIcons = document.createElement('div');
     const icon1 = document.createElement('i');
@@ -98,8 +99,8 @@ function renderTodoList(project) {
     const icon3 = document.createElement('i');
     const icon4 = document.createElement('i');
     todoIcons.classList.add('todo-icons');
-    icon1.classList.add('fa', 'fa-minus-circle');
-    icon1.style.color = todo.status === true ? '#07a631' : '#acadac';
+    icon1.classList.add('fa', 'fa-minus-circle', 'status-icon');
+    icon1.style.color = '#acadac';
     icon2.classList.add('fa', 'fa-window-close', 'delete-icon');
     icon3.classList.add('fa', 'fa-pencil', 'edit-icon');
     icon4.classList.add('fa', 'fa-caret-down', 'details-icon');
@@ -108,7 +109,6 @@ function renderTodoList(project) {
     title.textContent = limitTitle(todo.title, 30);
     const priority = document.createElement('div');
     priority.textContent = todo.priority;
-    priority.style.color = priorityColor(todo.priority);
     todoTitle.append(icon1);
     todoTitle.append(title);
     todoItem.appendChild(visibleTodo);
@@ -124,13 +124,13 @@ function renderTodoList(project) {
 }
 
 function getTodoInfo() {
-  const todo = {
-    title: document.querySelector('#todoTitle').value,
-    due: document.querySelector('#todoDue').value,
-    priority: document.querySelector('#priority').value,
-    description: document.querySelector('#todoDescription').value,
+  const title = document.querySelector('#todoTitle').value;
+  const due = document.querySelector('#todoDue').value;
+  const priority = document.querySelector('#priority').value;
+  const description = document.querySelector('#todoDescription').value;
+  return {
+    title, due, priority, description,
   };
-  return todo;
 }
 
 function validateForm(todo) {
@@ -169,9 +169,6 @@ function renderTodoSection(title) {
   section.insertAdjacentHTML('afterbegin', a);
   const b = renderForm();
   section.insertAdjacentHTML('beforeend', b);
-  const div = document.createElement('div');
-  div.classList.add('todo-list', 'col-12');
-  section.append(div);
 }
 
 function toggleForm() {
@@ -190,6 +187,10 @@ function resetForm() {
 
 function toggleDetails(id) {
   document.getElementById(`detail-section-${id}`).classList.toggle('hidden');
+}
+
+function changeStatusColor() {
+
 }
 
 export {

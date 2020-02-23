@@ -11,10 +11,10 @@ import {
   renderTodoSection, getTodoInfo, renderTodoList, clearTodo, toggleForm, resetForm, toggleDetails,
   updateTodoInfo, setTodoInfo, toggleEditBtn, validateForm,
 } from './view/todoView';
+import TodoItem from './model/todo';
 
 function createProject(title) {
-  const ID = generateID(getProjectArr());
-  const p = Project(title, ID);
+  const p = Project(title);
   addProject(p);
   updateLocalStorage();
   renderProject();
@@ -25,10 +25,9 @@ function createTodo(projectID) {
   const projects = getProjectArr();
   const project = projects.find(element => element.id === projectID);
   const projectIndex = projects.indexOf(project);
-  const ID = generateID(project.todoList);
   const todo = getTodoInfo();
   if (validateForm(todo)) {
-    todo.id = ID;
+    TodoItem(todo.title, todo.description, todo.due, todo.priority)
     todoListCtrl.addTodo(projects, projectIndex, todo);
     updateLocalStorage();
     toggleForm();
@@ -74,6 +73,8 @@ const mainController = (() => {
     const { id } = e.target;
     const projectID = id.match(/\d$/).toString();
     const todoID = id.match(/\d+/).toString();
+    console.log(projectID);
+    console.log(todoID);
     const project = findProject(projectID);
     const todo = project.todoList[todoID];
     if (id.match(/edit-\d+/)) {
@@ -104,6 +105,7 @@ const mainController = (() => {
 
   const eventHandler = () => {
     dom.newProject.addEventListener('keypress', addNewProject);
+
     dom.projectDiv.addEventListener('click', e => {
       let projectID;
       if (e.target.id) {
@@ -115,7 +117,32 @@ const mainController = (() => {
       document.querySelector('.new-todo').addEventListener('click', toggleForm);
       document.getElementById('add-todo').addEventListener('click', addNewTodo);
       document.getElementById('edit-todo').addEventListener('click', editBtnTodo);
-      document.querySelector('.todo-list').addEventListener('click', todoIconManager);
+      document.querySelector('.todo-lists').addEventListener('click', e => {
+        const id = e.target.closest('.todo-item').dataset.info;
+        const ids = id.split('-');
+        console.log(ids);
+        const todoID = parseInt(ids[0], 10);
+        const projectID = parseInt(ids[1], 10);
+        const project = findProject(projectID);
+        const todo = project.todoList[todoID];
+        if (e.target.matches('.status-icon')) {
+          // toggle color of the button
+          console.log(4);
+          // update the todo list
+        } else if (e.target.matches('.delete-icon')) {
+          todoListCtrl.deleteTodo(project, project.todoList.indexOf(todo));
+          updateLocalStorage();
+          renderTodoList(project);
+        }
+        else if (e.target.matches('.edit-icon')) {
+          toggleForm();
+          setTodoInfo(todo);
+          toggleEditBtn();
+        }
+        else if (e.target.matches('.details-icon')) {
+          toggleDetails(todoID);
+        }
+      });
     });
   };
   return { eventHandler };

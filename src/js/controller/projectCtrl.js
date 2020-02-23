@@ -7,16 +7,6 @@ function updateProjects() {
   }
 }
 
-function generateID(array) {
-  let ID;
-  if (array.length > 0) {
-    ID = array[array.length - 1].id + 1;
-  } else if (array.length === 0) {
-    ID = 0;
-  }
-  return ID;
-}
-
 function getProjectArr() {
   return projects;
 }
@@ -57,6 +47,6 @@ function validateInput(element) {
 }
 
 export {
-  addProject, getProjectArr, generateID, updateProjects, deleteProject,
+  addProject, getProjectArr, updateProjects, deleteProject,
   editProject, updateLocalStorage, findProject, validateInput,
 };
