@@ -38,7 +38,6 @@ const clearTodo = () => {
 };
 
 function priorityColor(priority) {
-
   let color;
   switch (priority) {
     case 'urgent':
@@ -57,10 +56,17 @@ function priorityColor(priority) {
   return color;
 }
 
-function addDetails(parent, date, description, id) {
+function addDetails(parent, title, date, description, id) {
   const detailSection = document.createElement('div');
   detailSection.classList.add('details-section', 'hidden');
   detailSection.setAttribute('id', `detail-section-${id}`);
+  const listIcon = document.createElement('i');
+  listIcon.classList.add('fa', 'fa-chevron-right');
+  const Title = document.createElement('span');
+  Title.textContent = `Title: ${title}`;
+  const fullTitle = document.createElement('p');
+  fullTitle.append(listIcon);
+  fullTitle.append(Title);
   const dueDate = document.createElement('p');
   const listIcon1 = document.createElement('i');
   listIcon1.classList.add('fa', 'fa-chevron-right');
@@ -75,6 +81,7 @@ function addDetails(parent, date, description, id) {
   dueDate.append(due);
   descriptionSection.append(listIcon2);
   descriptionSection.append(desc);
+  detailSection.append(fullTitle);
   detailSection.append(dueDate);
   detailSection.append(descriptionSection);
   parent.append(detailSection);
@@ -101,6 +108,9 @@ function renderTodoList(project) {
     todoIcons.classList.add('todo-icons');
     icon1.classList.add('fa', 'fa-minus-circle', 'status-icon');
     icon1.style.color = '#acadac';
+    if (todo.status) {
+      icon1.classList.add('status-green');
+    }
     icon2.classList.add('fa', 'fa-window-close', 'delete-icon');
     icon3.classList.add('fa', 'fa-pencil', 'edit-icon');
     icon4.classList.add('fa', 'fa-caret-down', 'details-icon');
@@ -118,7 +128,7 @@ function renderTodoList(project) {
     todoIcons.append(icon2);
     todoIcons.append(icon3);
     todoIcons.append(icon4);
-    addDetails(todoItem, todo.due, todo.description, todo.id);
+    addDetails(todoItem, todo.title, todo.due, todo.description, todo.id);
     projectsDiv.append(todoItem);
   });
 }
@@ -184,10 +194,6 @@ function resetForm() {
 
 function toggleDetails(id) {
   document.getElementById(`detail-section-${id}`).classList.toggle('hidden');
-}
-
-function changeStatusColor() {
-
 }
 
 export {

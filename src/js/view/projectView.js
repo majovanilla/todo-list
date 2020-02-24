@@ -1,4 +1,5 @@
 import dom from './domStrings';
+import { updateCompletion, getRedAlert } from '../controller/projectCtrl';
 
 function clearList(parentNode) {
   while (parentNode.firstChild) {
@@ -19,7 +20,7 @@ const limitTitle = (title, limit = 30) => {
       }
       return acc + current.length;
     }, 0);
-    //return the result
+    // return the result
     return `${newTitle.join(' ')} ...`;
   }
   return title;
@@ -36,7 +37,17 @@ function renderProject() {
       projectDiv.setAttribute('id', project.id);
       const h2 = document.createElement('h2');
       h2.classList.add('project-title');
-      h2.textContent = limitTitle(project.title, 25);
+      h2.textContent = limitTitle(project.title, 20);
+      const redAlert = document.createElement('div');
+      redAlert.classList.add('danger-status');
+      redAlert.dataset.projectInfo = `d-${project.id}`;
+      redAlert.textContent = getRedAlert(project.todoList);
+      h2.append(redAlert);
+      const completion = document.createElement('div');
+      completion.classList.add('completion-status');
+      completion.dataset.projectInfo = `c-${project.id}`;
+      completion.textContent = `${updateCompletion(project)}%`;
+      h2.append(completion);
       const deleteIcon = document.createElement('i');
       deleteIcon.classList.add('fa', 'fa-window-close', 'project-delete-icon');
       projectDiv.append(h2);
@@ -66,4 +77,17 @@ const renderNav = () => {
   dom.mainnav.insertAdjacentHTML('afterbegin', markup);
 };
 
-export { clearInput, renderProject, selectedProject, renderNav, limitTitle };
+/* changeClass(parent, addClass, require) {
+  if (require) {
+    if (!parent.classList.contains(addClass)) {
+      parent.classList.add(addClass);
+    }
+  } else if (parent.classList.contains(addClass)) {
+    parent.classList.remove(addClass);
+  }
+
+} */
+
+export {
+  clearInput, renderProject, selectedProject, renderNav, limitTitle,
+};

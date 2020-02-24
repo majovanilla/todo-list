@@ -48,6 +48,34 @@
   overflow: hidden;
   font-size: 1.5rem;
   font-weight: bold;
+  position: relative;
+}
+
+.danger-status {
+  position: absolute;
+  display: flex;
+  padding:7px;
+  font-size: 8px;
+  border-radius: 50%;
+  background-color: rgb(226, 80, 80);
+  color: #fff;
+  top: 0;
+  right: 35px;
+  align-items: center;
+}
+
+.completion-status {
+  position: absolute;
+  display: flex;
+  width: 24px;
+  height: 24px;
+  font-size: 8px;
+  border-radius: 50%;
+  background-color: #27a031;
+  color: #fff;
+  top: 0;
+  right: 5px;
+  align-items: center;
 }
 
 .project-delete-icon {
@@ -108,6 +136,7 @@
 
 }
 .new-form input:not(:last-child),
+.new-form input:not(:nth-last-child(2)),
 .new-form textarea {
   width: 100%;
   margin: 10px;
@@ -155,6 +184,17 @@
   transition: all 0.5s;
 }
 
+.todo-icons {
+  visibility: hidden;
+  opacity: 0;
+  transition: all 0.5s;
+}
+
+.todo-item:hover .todo-icons {
+  opacity: 1;
+  visibility: visible;
+}
+
 .visible-todo-item {
   display: flex;
   justify-content: space-between;
@@ -187,6 +227,11 @@ i {
   display: flex;
   flex-direction: column;
   padding-left: 10px;
+}
+
+.status-green {
+  transform: translateY(2);
+  color: rgb(44, 184, 67) !important;
 }
 // footer section
 

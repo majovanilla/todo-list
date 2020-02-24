@@ -1,10 +1,12 @@
 import '../css/style.scss';
 import Project from './model/project';
 import {
-  addProject, updateProjects, generateID, getProjectArr,
-  updateLocalStorage, deleteProject, findProject, validateInput,
+  addProject, updateProjects, getProjectArr,
+  updateLocalStorage, deleteProject, findProject, validateInput, updateCompletion, getRedAlert,
 } from './controller/projectCtrl';
-import { renderProject, clearInput, selectedProject, renderNav } from './view/projectView';
+import {
+  renderProject, clearInput, selectedProject, renderNav,
+} from './view/projectView';
 import * as todoListCtrl from './controller/todoListCtrl';
 import dom from './view/domStrings';
 import {
@@ -14,6 +16,7 @@ import {
 import TodoItem from './model/todo';
 
 function createProject(title) {
+  getRedAlert();
   const p = Project(title);
   addProject(p);
   updateLocalStorage();
@@ -29,7 +32,6 @@ function createTodo(projectID) {
   } = getTodoInfo();
   if (validateForm(title, due, priority, description) !== false) {
     const newTodo = TodoItem(title, description, due, priority);
-    console.log(newTodo);
     todoListCtrl.addTodo(projects, projectIndex, newTodo);
     updateLocalStorage();
     toggleForm();
@@ -73,9 +75,7 @@ const mainController = (() => {
     const projectID = document.querySelector('.selected').id;
     const todoID = document.getElementById('id').value;
     const project = findProject(projectID);
-    console.log(project);
     const todo = project.todoList.find(ele => ele.id === todoID);
-    console.log(todo);
     updateTodoInfo(todo);
     updateLocalStorage();
     toggleEditBtn();
@@ -110,19 +110,20 @@ const mainController = (() => {
       const todoID = ids[0];
       const projectID = ids[1];
       const project = findProject(projectID);
-      console.log(project);
       const index = project.todoList.findIndex(ele => ele.id === todoID);
       const todo = project.todoList[index];
       if (e.target.matches('.status-icon')) {
-        // toggle color of the button
-        console.log(4);
+        e.target.classList.toggle('status-green');
         // update the todo list
+        project.todoList[index].status = !project.todoList[index].status;
+        const a = document.querySelector(`[data-projectinfo=c-${projectID}]`);
+        a.textContent = updateCompletion(project);
+        updateLocalStorage();
       } else if (e.target.matches('.delete-icon')) {
         todoListCtrl.deleteTodo(project, project.todoList.indexOf(todo));
         updateLocalStorage();
         renderTodoList(project);
       } else if (e.target.matches('.edit-icon')) {
-        console.log('working');
         toggleForm();
         setTodoInfo(todo);
         toggleEditBtn();

@@ -1,4 +1,4 @@
-let projects = [{ title: 'Default project', id: 0, todoList: [] }];
+let projects = [];
 
 function updateProjects() {
   const localStorageArr = JSON.parse(localStorage.getItem('projects'));
@@ -45,7 +45,32 @@ function validateInput(element) {
   return true;
 }
 
+function updateCompletion(project) {
+  if (project.todoList.length > 0) {
+    const totalTodos = project.todoList.length;
+    const arr = project.todoList.filter(ele => ele.status === true);
+    const completed = arr.length;
+    const percentage = ((completed * 100) / totalTodos).toFixed(0);
+    return percentage;
+  }
+  return 0;
+}
+
+function getRedAlert(arr) {
+  let count = 0;
+  if (arr) {
+    for (let i = 0; i < arr.length; i += 1) {
+      const date = new Date(arr[i].due).setHours(0, 0, 0, 0);
+      const todayDate = new Date().setHours(0, 0, 0, 0);
+      if (todayDate >= date) {
+        count += 1;
+      }
+    }
+  }
+  return count;
+}
+
 export {
   addProject, getProjectArr, updateProjects, deleteProject,
-  editProject, updateLocalStorage, findProject, validateInput,
+  editProject, updateLocalStorage, findProject, validateInput, updateCompletion, getRedAlert,
 };
