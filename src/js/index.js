@@ -83,14 +83,16 @@ const mainController = (() => {
 
   const addNewTodo = () => {
     const selectedProject = document.querySelector('.selected');
-    const ID = parseInt(selectedProject.id, 10);
+    const ID = parseInt(selectedProject.firstChild.id, 10);
     createTodo(ID);
   };
 
-  const addQuickTodo = () => {
+  const addQuickTodo = (e) => {
     const selectedProject = document.querySelector('.selected');
-    const ID = parseInt(selectedProject.id, 10);
-    createQuickTodo(ID);
+    const ID = parseInt(selectedProject.firstChild.id, 10);
+    if (e.key === 'Enter') {
+      createQuickTodo(ID);
+    }
   };
 
   const todoIconManager = e => {

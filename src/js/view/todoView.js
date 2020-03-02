@@ -110,7 +110,7 @@ function getTodoInfo() {
 }
 
 function getQuickTodo() {
-  return document.querySelector('quick-todo-input').value;
+  return document.querySelector('.quick-todo-input').value;
 }
 
 function validateForm(todo) {
