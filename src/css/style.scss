@@ -1,64 +1,94 @@
 @import './scss/reset';
 
+/* variables */
+
+$white: #dddddd;
+$gray: rgb(50, 51, 51);
+
+%clear-input {
+  outline: none;
+  border: none;
+}
+
+%input-inside {
+  margin-bottom: 15px;
+  padding: 10px;
+  color: white;
+}
+
+.content {
+  width: 100%;
+}
+
 .project-section {
-  padding: 50px 30px;
-  box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
-  background-image: linear-gradient(to right, rgb(129, 206, 202), rgb(97, 218, 137));
+  padding: 50px 0;
+  background: rgb(50, 51, 51);
   min-height: 100vh;
   align-content: flex-start;
-
 }
 
 .section-head {
+  padding: 10px 30px;
   font-size: 30px;
   font-weight: 700;
-  color:#000;
-  margin-bottom: 10px;
 }
 
 .add-project {
-  border: none;
-  border-bottom: 2px, solid,rgb(154, 198, 236);
-  border-bottom: solid;
+  border: solid rgba(0, 0, 0, 0.2) 1px;
+  background: none;
   font-size: 16px;
   height: 30px;
-  margin-bottom: 15px;
-  padding: 8px;
+  @extend %input-inside;
+
+  &::placeholder {
+    color: rgba($color: #ffffff, $alpha: 0.7)
+  }
+
+  &:focus {
+    @extend %clear-input;
+    background: $white;
+    color: $gray;
+  }
+
+  &:focus::placeholder {
+    color: rgba($gray, 0.3);
+  }
 }
 
 .project {
   display: flex;
   justify-content: space-between;
-  align-items: center;
-  text-align: start;
-  border-top: 2px solid aliceblue;
-  padding: 10px 0;
-  padding-left: 20px;
+  align-items: baseline;
 }
 
 .project-title {
-  width: inherit;
-  overflow: hidden;
+  padding: 10px 3rem;
   font-size: 1.5rem;
-  font-weight: bold;
+  color: rgba(255, 255, 255, 0.7);
+  overflow: hidden;
 }
 
-.project-title:hover {
-  transform: scale(1.2);
-  transition: ease-in-out;
+.h2-selected,
+.delete-icon-selected {
+  color: $gray !important;
 }
 
 .selected {
-  color: #fff;
+  background: $white;
+}
+
+.project-delete-icon {
+  color: $white;
+  padding: 0 30px;
 }
 
 // todo details section
-.todo-section {
-  margin-left: 40px;
-  padding: 30px;
-  background-image: linear-gradient(to left bottom, rgb(129, 206, 202), rgb(97, 218, 137));
 
+.todo-section {
+  padding: 30px;
+  background: $white;
 }
+
 .todo-head {
   display: flex;
   flex-direction: row;
@@ -67,26 +97,38 @@
   font-weight: 700;
   margin-bottom: 10px;
 }
+
+.todo-input {
+  background: rgba($gray, 0.5);
+  font-size: 1rem;
+  @extend %clear-input;
+  @extend %input-inside;
+
+  &::placeholder {
+    color: $white;
+  }
+
+  &:focus::placeholder{
+    color: rgba($white, 0.3);
+  }
+}
+
 .todo-head p {
   color: rgb(87, 182, 123);
 }
-
-.todo-head p:hover {
-  transform: scale(1.3);
-  transition: ease-in-out;
-}
-
 
 // new form will be hidden
 .alert-message {
   color: red;
   font-weight: 400;
 }
+
 .new-form {
   margin: auto;
   padding: 10px;
 
 }
+
 .new-form input,
 .new-form textarea {
   margin: 10px;
@@ -95,6 +137,7 @@
   border: none;
   border-bottom: 2px solid;
 }
+
 .todo-list {
   color: rgb(40, 138, 97);
 }
@@ -106,11 +149,6 @@
   font-weight: 700;
 }
 
-.todo-title:hover {
-  transform: scale(1.1);
-  transition: ease-out;
-}
-
 .todo-item {
   display: flex;
   justify-content: space-between;
@@ -119,6 +157,7 @@
   padding: 0 20px;
   position: relative;
 }
+
 .todo-item:hover {
   cursor: pointer;
 }
@@ -139,18 +178,13 @@
 .todo-item:hover .priority-status {
   visibility: visible;
 }
+
 .todo-icons > i {
   padding: 0 10px;
 }
 
 i {
   padding: 5px;
-}
-
-.delete-icon:hover,
-.edit-icon:hover,
-.details-icon:hover {
-  transform: scale(2);
 }
 
 .hidden {
@@ -160,12 +194,4 @@ i {
 .details-section {
   display: flex;
   flex-direction: column;
-}
-// footer section
-
-.footer-section {
-  padding: 10px;
-  background-color:black;
-  color:#fff;
-  position: sticky;
 }

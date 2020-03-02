@@ -1,5 +1,6 @@
 import '../css/style.scss';
 import Project from './model/project';
+import Todo from './model/todo';
 import {
   addProject, updateProjects, generateID, getProjectArr,
   updateLocalStorage, deleteProject, findProject, validateInput,
@@ -9,7 +10,7 @@ import * as todoListCtrl from './controller/todoListCtrl';
 import dom from './view/domStrings';
 import {
   renderTodoSection, getTodoInfo, renderTodoList, clearTodo, toggleForm, resetForm, toggleDetails,
-  updateTodoInfo, setTodoInfo, toggleEditBtn, validateForm,
+  updateTodoInfo, setTodoInfo, toggleEditBtn, validateForm, getQuickTodo,
 } from './view/todoView';
 
 
@@ -20,6 +21,21 @@ function createProject(title) {
   updateLocalStorage();
   renderProject();
   clearInput(dom.newProject);
+}
+
+function createQuickTodo(projectID) {
+  const projects = getProjectArr();
+  const project = projects.find(element => element.id === projectID);
+  const projectIndex = projects.indexOf(project);
+  const ID = generateID(project.todoList);
+  const title = getQuickTodo();
+  const todo = Todo(title);
+  todo.id = ID;
+  todoListCtrl.addTodo(projects, projectIndex, todo);
+  updateLocalStorage();
+  const updatedProjects = getProjectArr();
+  const updatedProject = updatedProjects.find(element => element.id === projectID);
+  renderTodoList(updatedProject);
 }
 
 function createTodo(projectID) {
@@ -71,6 +87,12 @@ const mainController = (() => {
     createTodo(ID);
   };
 
+  const addQuickTodo = () => {
+    const selectedProject = document.querySelector('.selected');
+    const ID = parseInt(selectedProject.id, 10);
+    createQuickTodo(ID);
+  };
+
   const todoIconManager = e => {
     const { id } = e.target;
     const projectID = id.match(/\d$/).toString();
@@ -117,6 +139,7 @@ const mainController = (() => {
       document.getElementById('add-todo').addEventListener('click', addNewTodo);
       document.getElementById('edit-todo').addEventListener('click', editBtnTodo);
       document.querySelector('.todo-list').addEventListener('click', todoIconManager);
+      document.querySelector('.quick-todo-input').addEventListener('keypress', addQuickTodo);
     });
   };
   return { eventHandler };
