@@ -1,64 +1,38 @@
-let projects = [{ title: 'Default project', id: 0, todoList: [] }];
+const projectController = () => {
+  const addNewProject = (e) => {
+    if (e.key === 'Enter') {
+      const projectTitle = dom.newProject;
+      if (validateInput(projectTitle)) {
+        createProject(projectTitle.value);
+      }
+    }
+  };
 
-function updateProjects() {
-  const localStorageArr = JSON.parse(localStorage.getItem('projects'));
-  if (localStorageArr) {
-    projects = [...localStorageArr];
+  function createProject(title) {
+    const ID = generateID(getProjectArr());
+    const p = Project(title, ID);
+    addProject(p);
+    updateLocalStorage();
+    renderProject();
+    clearInput(dom.newProject);
   }
-}
 
-function generateID(array) {
-  let ID;
-  if (array.length > 0) {
-    ID = array[array.length - 1].id + 1;
-  } else if (array.length === 0) {
-    ID = 0;
-  }
-  return ID;
-}
+  const projectClick = (projectId) => {
+    const project = findProject(projectId);
+    clearTodo();
+    selectedProject(projectId);
+    renderTodoSection();
+    renderTodoList(project);
+  };
 
-function getProjectArr() {
-  return projects;
-}
+  const projectDelete = (id) => {
+    const ID = parseInt(id, 10);
+    deleteProject(ID);
+    updateLocalStorage();
+    renderProject();
+  };
 
-function addProject(newProject) {
-  projects.push(newProject);
-}
-
-function deleteProject(id) {
-  const ids = projects.map(current => current.id);
-
-  const index = ids.indexOf(id);
-  if (index !== -1) {
-    projects.splice(index, 1);
-  }
-}
-
-function editProject(index, title) {
-  projects[index].title = title;
-}
-
-function updateLocalStorage() {
-  localStorage.setItem('projects', JSON.stringify(projects));
-}
-
-function findProject(id) {
-  updateProjects();
-  const ids = projects.map(current => current.id);
-  const index = ids.indexOf(parseInt(id, 10));
-  return projects[index];
-}
-
-function validateInput(element) {
-  if (element.value === '') {
-    return false;
-  }
-  return true;
-}
-
-updateLocalStorage();
-
-export {
-  addProject, getProjectArr, generateID, updateProjects, deleteProject,
-  editProject, updateLocalStorage, findProject, validateInput,
+  updateLocalStorage();
 };
+
+export { projectController as default };

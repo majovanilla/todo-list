@@ -3,8 +3,10 @@ const section = document.querySelector('.todo-section');
 function renderHead() {
   const todoHead = `<div class="col-12 todo-head d-flex flex-column">
                         <h2 class="todo-head mb-5">My doDO's</h2>
-                        <input type="text" class="quick-todo-input" placeholder="My new doDo">
-                        <p><i class="fa fa-plus-circle new-todo"></i></p>
+                        <div class="quick-todo-section col-12">
+                          <input type="text" class="quick-todo-input col-11" placeholder="My new doDo">
+                          <p><i class="fa fa-plus-circle new-todo"></i></p>
+                        </div>
                       </div>`;
   return todoHead;
 }
@@ -110,7 +112,7 @@ function getTodoInfo() {
 }
 
 function getQuickTodo() {
-  return document.querySelector('quick-todo-input').value;
+  return document.querySelector('.quick-todo-input').value;
 }
 
 function validateForm(todo) {
@@ -174,5 +176,6 @@ function toggleDetails(id) {
 
 export {
   getTodoInfo, clearTodo, renderTodoSection, renderTodoList,
-  toggleForm, resetForm, setTodoInfo, toggleEditBtn, updateTodoInfo, toggleDetails, validateForm, getQuickTodo,
+  toggleForm, resetForm, setTodoInfo, toggleEditBtn, updateTodoInfo,
+  toggleDetails, validateForm, getQuickTodo,
 };

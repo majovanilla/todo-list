@@ -4,10 +4,6 @@ function clearList(parentNode) {
   }
 }
 
-function clearInput(domElement) {
-  domElement.value = '';
-}
-
 function renderProject() {
   const projectsArr = JSON.parse(localStorage.getItem('projects'));
   const section = document.querySelector('.project-list');
