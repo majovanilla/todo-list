@@ -44,8 +44,8 @@ Give a ⭐️ if you like this project!
 
 ## Acknowledgments
 
-- Final Project of the Rails Section from the [Microverse Curriculum] (https://www.microverse.org/)
-- We follow the instructions of [The Odin Project](https://www.theodinproject.com/courses/javascript/lessons/todo-list)
+- Final Project of the Rails Section from the [Microverse Curriculum](https://www.microverse.org/)
+- We followed the instructions of [The Odin Project](https://www.theodinproject.com/courses/javascript/lessons/todo-list)
 - CSS Reset from [Meyer Web](http://meyerweb.com/eric/tools/css/reset/)
 
 ## 📝 License
