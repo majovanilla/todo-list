@@ -3,8 +3,10 @@ const section = document.querySelector('.todo-section');
 function renderHead() {
   const todoHead = `<div class="col-12 todo-head d-flex flex-column">
                         <h2 class="todo-head mb-5">My doDO's</h2>
-                        <input type="text" class="quick-todo-input" placeholder="My new doDo">
-                        <p><i class="fa fa-plus-circle new-todo"></i></p>
+                        <div class="d-flex align-items-center">
+                          <input type="text" class="quick-todo-input col-10" placeholder="My new doDo">
+                          <p><i class="fa fa-plus-circle new-todo col-2"></i></p>
+                        </div>
                       </div>`;
   return todoHead;
 }

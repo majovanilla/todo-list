@@ -13,7 +13,6 @@ import {
   updateTodoInfo, setTodoInfo, toggleEditBtn, validateForm, getQuickTodo,
 } from './view/todoView';
 
-
 function createProject(title) {
   const ID = generateID(getProjectArr());
   const p = Project(title, ID);
@@ -29,32 +28,35 @@ function createQuickTodo(projectID) {
   const projectIndex = projects.indexOf(project);
   const ID = generateID(project.todoList);
   const title = getQuickTodo();
-  const todo = Todo(title);
-  todo.id = ID;
-  todoListCtrl.addTodo(projects, projectIndex, todo);
-  updateLocalStorage();
-  const updatedProjects = getProjectArr();
-  const updatedProject = updatedProjects.find(element => element.id === projectID);
-  renderTodoList(updatedProject);
-}
-
-function createTodo(projectID) {
-  const projects = getProjectArr();
-  const project = projects.find(element => element.id === projectID);
-  const projectIndex = projects.indexOf(project);
-  const ID = generateID(project.todoList);
-  const todo = getTodoInfo();
-  if (validateForm(todo)) {
+  if (title) {
+    const todo = Todo(title);
     todo.id = ID;
     todoListCtrl.addTodo(projects, projectIndex, todo);
     updateLocalStorage();
-    toggleForm();
     const updatedProjects = getProjectArr();
     const updatedProject = updatedProjects.find(element => element.id === projectID);
     renderTodoList(updatedProject);
-    resetForm();
+    clearInput(document.querySelector('.quick-todo-input'));
   }
 }
+
+// function createTodo(projectID) {
+//   const projects = getProjectArr();
+//   const project = projects.find(element => element.id === projectID);
+//   const projectIndex = projects.indexOf(project);
+//   const ID = generateID(project.todoList);
+//   const todo = getTodoInfo();
+//   if (validateForm(todo)) {
+//     todo.id = ID;
+//     todoListCtrl.addTodo(projects, projectIndex, todo);
+//     updateLocalStorage();
+//     toggleForm();
+//     const updatedProjects = getProjectArr();
+//     const updatedProject = updatedProjects.find(element => element.id === projectID);
+//     renderTodoList(updatedProject);
+//     resetForm();
+//   }
+// }
 
 const mainController = (() => {
   const addNewProject = (e) => {
@@ -84,7 +86,7 @@ const mainController = (() => {
   const addNewTodo = () => {
     const selectedProject = document.querySelector('.selected');
     const ID = parseInt(selectedProject.firstChild.id, 10);
-    createTodo(ID);
+    createQuickTodo(ID);
   };
 
   const addQuickTodo = (e) => {
@@ -137,8 +139,8 @@ const mainController = (() => {
         projectID = e.target.parentNode.firstChild.id;
         projectDelete(projectID);
       }
-      document.querySelector('.new-todo').addEventListener('click', toggleForm);
-      document.getElementById('add-todo').addEventListener('click', addNewTodo);
+      document.querySelector('.new-todo').addEventListener('click', addNewTodo);
+      // document.getElementById('add-todo').addEventListener('click', addNewTodo);
       document.getElementById('edit-todo').addEventListener('click', editBtnTodo);
       document.querySelector('.todo-list').addEventListener('click', todoIconManager);
       document.querySelector('.quick-todo-input').addEventListener('keypress', addQuickTodo);
