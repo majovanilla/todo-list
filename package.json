@@ -4,7 +4,7 @@
   "description": "> You will find a great application to store your pending activities.",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "jest",
     "build": "webpack --progress --mode=development",
     "watch": "webpack --progress --watch",
     "start": "webpack-dev-server"
@@ -20,8 +20,9 @@
   },
   "homepage": "https://github.com/majovanilla/todo-list#readme",
   "devDependencies": {
-    "@babel/core": "^7.8.3",
-    "@babel/preset-env": "^7.8.3",
+    "@babel/core": "^7.8.6",
+    "@babel/preset-env": "^7.8.6",
+    "babel-jest": "^25.1.0",
     "babel-loader": "^8.0.6",
     "css-loader": "^3.4.2",
     "eslint": "^6.8.0",
@@ -29,6 +30,7 @@
     "eslint-plugin-import": "^2.20.0",
     "file-loader": "^5.0.2",
     "html-loader": "^0.5.5",
+    "jest": "^25.1.0",
     "node-sass": "^4.13.1",
     "sass-loader": "^8.0.2",
     "style-loader": "^1.1.3",

@@ -36,6 +36,7 @@ function createQuickTodo(projectID) {
   const updatedProjects = getProjectArr();
   const updatedProject = updatedProjects.find(element => element.id === projectID);
   renderTodoList(updatedProject);
+  clearInput(document.querySelector('.quick-todo-input'));
 }
 
 function createTodo(projectID) {

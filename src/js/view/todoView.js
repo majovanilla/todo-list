@@ -63,7 +63,7 @@ function renderTodoList(project) {
   todo.forEach(todo => {
     const todoItem = document.createElement('div');
     const todoTitle = document.createElement('div');
-    todoItem.classList.add('todo-item', 'row', 'my-3');
+    todoItem.classList.add('todo-item', 'row', 'my-3', 'col-5');
     todoItem.setAttribute('id', todo.id);
     todoTitle.classList.add('todo-title', 'col-8');
     const todoIcons = document.createElement('div');
