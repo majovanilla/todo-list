@@ -41,7 +41,7 @@ $gray: rgb(50, 51, 51);
   @extend %input-inside;
 
   &::placeholder {
-    color: rgba($color: #ffffff, $alpha: 0.7)
+    color: rgba($color: $white, $alpha: 0.7)
   }
 
   &:focus {
@@ -115,7 +115,7 @@ $gray: rgb(50, 51, 51);
 }
 
 .todo-head p {
-  color: rgb(87, 182, 123);
+  color: $gray;
 }
 
 .quick-todo-input {
@@ -143,7 +143,7 @@ $gray: rgb(50, 51, 51);
 }
 
 .todo-list {
-  color: rgb(40, 138, 97);
+  color: $gray;
 }
 
 .todo-title {
@@ -157,7 +157,6 @@ $gray: rgb(50, 51, 51);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: #fff;
   padding: 0 20px;
   position: relative;
 }
@@ -169,7 +168,6 @@ $gray: rgb(50, 51, 51);
 .todo-item .priority-status {
   visibility: hidden;
   width: 150px;
-  background-color: rgb(20, 189, 132);
   color: #fff;
   text-align: center;
   border-radius: 5px;
@@ -179,9 +177,9 @@ $gray: rgb(50, 51, 51);
   top: -20px;
 }
 
-.todo-item:hover .priority-status {
-  visibility: visible;
-}
+// .todo-item:hover .priority-status {
+//   visibility: visible;
+// }
 
 .todo-icons > i {
   padding: 0 10px;
