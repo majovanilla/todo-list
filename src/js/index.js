@@ -78,7 +78,7 @@ const mainController = (() => {
   };
 
   const editBtnTodo = () => {
-    // if (e.target.className === 'edit-todo') {
+    console.log('working 2')
     const selectedProject = document.querySelector('.h2-selected');
     const projectID = parseInt(selectedProject.id, 10);
     const todoID = document.getElementById('id').value;
@@ -86,11 +86,7 @@ const mainController = (() => {
     const todo = project.todoList[todoID];
     updateTodoInfo(todo);
     updateLocalStorage();
-    // toggleEditBtn();
-    // toggleForm();
     renderTodoList(findProject(projectID));
-    // renderForm();
-    // }
   };
 
   const todoManager = e => {
@@ -100,14 +96,11 @@ const mainController = (() => {
       const todoID = id.match(/\d+/).toString();
       const project = findProject(projectID);
       const todo = project.todoList[todoID];
-      // console.log(todo)
       if (id.match(/edit-\d+/)) {
-        console.log(id)
         const domTodo = e.target.parentNode.parentNode;
         renderForm(domTodo);
-        // toggleForm();
         setTodoInfo(todo);
-        // toggleEditBtn();
+        document.querySelector('.edit-todo').addEventListener('click', editBtnTodo);
       } else if (id.match(/delete-\d+/)) {
         todoListCtrl.deleteTodo(project, project.todoList.indexOf(todo));
         updateLocalStorage();
@@ -115,8 +108,6 @@ const mainController = (() => {
       } else if (id.match(/details-\d+/)) {
         toggleDetails(todoID);
       }
-    } else if (e.target.className === 'edit-todo') {
-      editBtnTodo(e);
     }
   };
 
@@ -131,7 +122,6 @@ const mainController = (() => {
         projectDelete(projectID);
       }
       document.querySelector('.new-todo').addEventListener('click', addNewTodo);
-      // document.querySelector('.todo-list').addEventListener('click', editBtnTodo);
       document.querySelector('.todo-list').addEventListener('click', todoManager);
       document.querySelector('.quick-todo-input').addEventListener('keypress', addQuickTodo);
     });

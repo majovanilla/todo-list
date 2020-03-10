@@ -94,8 +94,6 @@ function renderTodoList(project) {
     todoIcons.append(icon2);
     todoIcons.append(icon3);
     addDetails(todoItem, todo.due, todo.description, todo.id);
-    // const details = renderForm();
-    // todoItem.innerHTML += details;
     projectsDiv.append(todoItem);
   });
 }
@@ -152,15 +150,6 @@ function renderTodoSection() {
   div.classList.add('todo-list', 'col-12');
   section.append(div);
 }
-
-// function toggleForm() {
-//   document.querySelector('.todo-form').classList.toggle('hidden');
-// }
-
-// function toggleEditBtn() {
-//   document.getElementById('add-todo').classList.toggle('hidden');
-//   document.getElementById('edit-todo').classList.toggle('hidden');
-// }
 
 function resetForm() {
   const form = document.querySelector('.new-form');
