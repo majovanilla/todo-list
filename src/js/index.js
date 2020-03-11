@@ -3,14 +3,15 @@ import Project from './model/project';
 import Todo from './model/todo';
 import {
   addProject, getProjects, generateID,
-  initialProject, deleteProject, findProject, validateInput, updateLocalStorage, updateLocalProject, findProjectIndex,
+  initialProject, deleteProject, findProject, validateInput, updateLocalProject,
+  findProjectIndex,
 } from './controller/projectCtrl';
 import { renderProject, clearInput, selectedProject } from './view/projectView';
 import * as todoListCtrl from './controller/todoListCtrl';
 import dom from './view/domStrings';
 import {
   renderTodoSection, renderTodoList, clearTodo, toggleDetails,
-  updateTodoInfo, setTodoInfo, getTodoInfo, getQuickTodo, renderForm,
+  updateTodoInfo, setTodoInfo, getQuickTodo, renderForm,
 } from './view/todoView';
 
 function createProject(title) {
