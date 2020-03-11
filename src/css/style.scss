@@ -1,1 +1,197 @@
 @import './scss/reset';
+
+/* variables */
+
+$white: #dddddd;
+$gray: rgb(50, 51, 51);
+
+%clear-input {
+  outline: none;
+  border: none;
+}
+
+%input-inside {
+  margin-bottom: 15px;
+  padding: 10px;
+  color: white;
+}
+
+.content {
+  width: 100%;
+}
+
+.project-section {
+  padding: 50px 0;
+  background: rgb(50, 51, 51);
+  min-height: 100vh;
+  align-content: flex-start;
+}
+
+.section-head {
+  padding: 10px 30px;
+  font-size: 30px;
+  font-weight: 700;
+}
+
+.add-project {
+  border: solid rgba(0, 0, 0, 0.2) 1px;
+  background: none;
+  font-size: 16px;
+  height: 30px;
+  @extend %input-inside;
+
+  &::placeholder {
+    color: rgba($color: $white, $alpha: 0.7)
+  }
+
+  &:focus {
+    @extend %clear-input;
+    background: $white;
+    color: $gray;
+  }
+
+  &:focus::placeholder {
+    color: rgba($gray, 0.3);
+  }
+}
+
+.project {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.project-title {
+  padding: 10px 3rem;
+  font-size: 1.5rem;
+  color: rgba(255, 255, 255, 0.7);
+  overflow: hidden;
+  width: 90%;
+}
+
+.h2-selected,
+.delete-icon-selected {
+  color: $gray !important;
+}
+
+.selected {
+  background: $white;
+}
+
+.project-delete-icon {
+  color: $white;
+  padding: 0 30px;
+}
+
+// todo details section
+
+.todo-section {
+  padding: 50px;
+  background: $white;
+}
+
+.todo-head {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  font-size: 30px;
+  font-weight: 700;
+  margin-bottom: 60px;
+  padding: 0;
+}
+
+.todo-input {
+  background: rgba($gray, 0.5);
+  font-size: 1rem;
+  @extend %clear-input;
+  @extend %input-inside;
+
+  &::placeholder {
+    color: $white;
+  }
+
+  &:focus::placeholder{
+    color: rgba($white, 0.3);
+  }
+}
+
+.todo-head p {
+  color: $gray;
+}
+
+.alert-message {
+  color: red;
+  font-weight: 400;
+}
+
+.new-form {
+  margin: auto;
+  padding: 10px;
+
+}
+
+.new-form input,
+.new-form textarea {
+  margin: 10px;
+  margin-left: 0;
+  padding: 5px;
+  border: none;
+  border-bottom: 2px solid;
+}
+
+.todo-list {
+  color: $gray;
+}
+
+.todo-title {
+  flex-direction: row;
+  padding: 10px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.todo-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0 20px;
+  position: relative;
+}
+
+.todo-item:hover {
+  cursor: pointer;
+}
+
+.todo-item .priority-status {
+  visibility: hidden;
+  width: 150px;
+  color: #fff;
+  text-align: center;
+  border-radius: 5px;
+  padding: 7px 0;
+  position: absolute;
+  z-index: 1;
+  top: -20px;
+}
+
+.edit-todo {
+  background-color: gray;
+  border: none;
+}
+
+.todo-icons > i {
+  padding: 0 10px;
+}
+
+i {
+  padding: 5px;
+}
+
+.hidden {
+  display: none !important;
+}
+
+.details-section {
+  display: flex;
+  flex-direction: column;
+}
