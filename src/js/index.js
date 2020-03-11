@@ -3,7 +3,7 @@ import Project from './model/project';
 import Todo from './model/todo';
 import {
   addProject, getProjects, generateID,
-  initialProject, deleteProject, findProject, validateInput, updateLocalStorage,
+  initialProject, deleteProject, findProject, validateInput, updateLocalStorage, updateLocalProject, findProjectIndex,
 } from './controller/projectCtrl';
 import { renderProject, clearInput, selectedProject } from './view/projectView';
 import * as todoListCtrl from './controller/todoListCtrl';
@@ -17,7 +17,6 @@ function createProject(title) {
   const ID = generateID(getProjects());
   const p = Project(title, ID);
   addProject(p);
-  // updateLocalStorage();
   renderProject();
   clearInput(dom.newProject);
 }
@@ -31,8 +30,7 @@ function createQuickTodo(projectID) {
   if (title) {
     const todo = Todo(title);
     todo.id = ID;
-    todoListCtrl.addTodo(projects, projectIndex, todo);
-    updateLocalStorage(projects);
+    todoListCtrl.addTodo(projectIndex, todo);
     const updatedProjects = getProjects();
     const updatedProject = updatedProjects.find(element => element.id === projectID);
     renderTodoList(updatedProject);
@@ -61,7 +59,6 @@ const mainController = (() => {
   const projectDelete = (id) => {
     const ID = parseInt(id, 10);
     deleteProject(ID);
-    // updateLocalStorage();
     renderProject();
   };
 
@@ -82,10 +79,12 @@ const mainController = (() => {
     const projectID = parseInt(selectedProject.id, 10);
     const todoID = document.getElementById('id').value;
     const project = findProject(projectID);
-    const todo = project.todoList[todoID];
+    const projectIndex = findProjectIndex(projectID);
+    const todoIndex = todoListCtrl.findTodoIndex(project, todoID);
+    const todo = project.todoList[todoIndex];
     updateTodoInfo(todo);
-    // updateLocalStorage();
-    renderTodoList(findProject(projectID));
+    updateLocalProject(project, projectIndex);
+    renderTodoList(project);
   };
 
   const todoManager = e => {
@@ -94,16 +93,18 @@ const mainController = (() => {
       const projectID = id.match(/\d$/).toString();
       const todoID = id.match(/\d+/).toString();
       const project = findProject(projectID);
-      const todo = project.todoList[todoID];
+      const projectIndex = findProjectIndex(projectID);
+      const todoIndex = todoListCtrl.findTodoIndex(project, todoID);
+      const todo = project.todoList[todoIndex];
       if (id.match(/edit-\d+/)) {
         const domTodo = e.target.parentNode.parentNode;
         renderForm(domTodo);
         setTodoInfo(todo);
         document.querySelector('.edit-todo').addEventListener('click', editBtnTodo);
       } else if (id.match(/delete-\d+/)) {
-        todoListCtrl.deleteTodo(project, project.todoList.indexOf(todo));
-        // updateLocalStorage();
-        renderTodoList(project);
+        todoListCtrl.deleteTodo(projectIndex, todoID);
+        const updatedProject = findProject(projectID);
+        renderTodoList(updatedProject);
       } else if (id.match(/details-\d+/)) {
         toggleDetails(todoID);
       }

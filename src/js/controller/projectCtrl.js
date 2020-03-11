@@ -1,5 +1,7 @@
 function getProjects() {
-  return JSON.parse(localStorage.getItem('projects'));
+  const local = JSON.parse(localStorage.getItem('projects'));
+  if (local) return local;
+  return [];
 }
 
 function updateLocalStorage(projects) {
@@ -41,8 +43,8 @@ function deleteProject(id) {
   const index = ids.indexOf(id);
   if (index !== -1) {
     projects.splice(index, 1);
+    updateLocalStorage(projects);
   }
-  updateLocalStorage(projects);
 }
 
 function editProject(index, title) {
@@ -51,11 +53,23 @@ function editProject(index, title) {
   updateLocalStorage(projects);
 }
 
-function findProject(id) {
+function findProjectIndex(id) {
   const projects = getProjects();
   const ids = projects.map(current => current.id);
   const index = ids.indexOf(parseInt(id, 10));
+  return index;
+}
+
+function findProject(id) {
+  const projects = getProjects();
+  const index = findProjectIndex(id);
   return projects[index];
+}
+
+function updateLocalProject(project, index) {
+  const projects = getProjects();
+  projects[index] = project;
+  updateLocalStorage(projects);
 }
 
 function validateInput(element) {
@@ -69,5 +83,5 @@ function validateInput(element) {
 
 export {
   initialProject, addProject, generateID, getProjects, deleteProject,
-  editProject, updateLocalStorage, findProject, validateInput,
+  editProject, updateLocalStorage, updateLocalProject, findProject, findProjectIndex, validateInput,
 };

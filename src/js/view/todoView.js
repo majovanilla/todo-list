@@ -1,5 +1,3 @@
-import TodoItem from "../model/todo";
-
 const section = document.querySelector('.todo-section');
 
 function renderHead() {
