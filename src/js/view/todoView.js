@@ -98,10 +98,10 @@ function renderTodoList(project) {
 
 function getTodoInfo() {
   const todo = {
-    title: document.querySelector('#todoTitle').value,
-    due: document.querySelector('#todoDue').value,
-    priority: document.querySelector('#priority').value,
-    description: document.querySelector('#todoDescription').value,
+    title: document.querySelector('.todoTitle').value,
+    due: document.querySelector('.todoDue').value,
+    priority: document.querySelector('.priority').value,
+    description: document.querySelector('.todoDescription').value,
   };
   return todo;
 }
@@ -138,7 +138,7 @@ function updateTodoInfo(todo) {
   todo.due = document.querySelector('.todoDue').value;
   todo.priority = document.querySelector('.priority').value;
   todo.description = document.querySelector('.todoDescription').value;
-  todo.id = document.querySelector('#id').value;
+  todo.id = parseInt(document.querySelector('#id').value, 10);
 }
 
 function renderTodoSection() {

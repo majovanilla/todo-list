@@ -10,7 +10,7 @@ import * as todoListCtrl from './controller/todoListCtrl';
 import dom from './view/domStrings';
 import {
   renderTodoSection, renderTodoList, clearTodo, toggleDetails,
-  updateTodoInfo, setTodoInfo, getQuickTodo, renderForm,
+  updateTodoInfo, setTodoInfo, getTodoInfo, getQuickTodo, renderForm,
 } from './view/todoView';
 
 function createProject(title) {
@@ -74,10 +74,10 @@ const mainController = (() => {
     if (e.key === 'Enter') createQuickTodo(ID);
   };
 
-  const editBtnTodo = () => {
+  const editBtnTodo = (e) => {
     const selectedProject = document.querySelector('.h2-selected');
     const projectID = parseInt(selectedProject.id, 10);
-    const todoID = document.getElementById('id').value;
+    const todoID = e.target.parentNode.parentNode.parentNode.id;
     const project = findProject(projectID);
     const projectIndex = findProjectIndex(projectID);
     const todoIndex = todoListCtrl.findTodoIndex(project, todoID);
@@ -94,9 +94,9 @@ const mainController = (() => {
       const todoID = id.match(/\d+/).toString();
       const project = findProject(projectID);
       const projectIndex = findProjectIndex(projectID);
-      const todoIndex = todoListCtrl.findTodoIndex(project, todoID);
-      const todo = project.todoList[todoIndex];
       if (id.match(/edit-\d+/)) {
+        const todoIndex = todoListCtrl.findTodoIndex(project, todoID);
+        const todo = project.todoList[todoIndex];
         const domTodo = e.target.parentNode.parentNode;
         renderForm(domTodo);
         setTodoInfo(todo);
