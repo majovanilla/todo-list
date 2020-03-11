@@ -2,8 +2,6 @@
 
 > You will find a great application to store your pending activities.
 
-![screenshot](img/screenshot.png)
-
 This project has this characteristics:
   - You can create projects with their own todo lists.
   - You can create multiple todo lists in the projects.
@@ -21,7 +19,7 @@ This project has this characteristics:
 
 ## Live Demo
 
-[Live Demo Link](https://majovanilla.github.io/todo-list)
+[Live Demo Link](https://majovanilla.github.io/todo-list/)
 
 ## Authors
 

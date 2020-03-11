@@ -31,13 +31,16 @@ function renderProject() {
 }
 
 const selectedProject = (projectId) => {
-  const previousProject = document.querySelector('.selected');
+  const previousProject = document.querySelector('.h2-selected');
   if (previousProject) {
-    previousProject.classList.remove('selected');
+    previousProject.classList.remove('h2-selected');
+    previousProject.nextElementSibling.classList.remove('delete-icon-selected');
+    previousProject.parentElement.classList.remove('selected');
   }
   const h2 = document.getElementById(projectId);
-  // dom.selectedProject.classList.remove('selected');
-  h2.classList.add('selected');
+  h2.classList.add('h2-selected');
+  h2.nextElementSibling.classList.add('delete-icon-selected');
+  h2.parentElement.classList.add('selected');
 };
 
 export { clearInput, renderProject, selectedProject };
