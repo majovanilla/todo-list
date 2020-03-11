@@ -13,36 +13,21 @@
 
 <body>
   <header>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-      <a class="navbar-brand" href="#">Todo App</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
-        aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
-      <ul class="collapse navbar-collapse justify-content-end" id="navbarNavAltMarkup">
-        <li class="nav-item"><a class="nav-link" href="#">Home</a></li>
-        <li class="nav-item"><a class="nav-link" href="#">Create Project</a></li>
-        <li class="nav-item dropdown"><a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button"
-            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Settings</a>
-          <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-            <a class="dropdown-item" href="#">User profile</a>
-            <a class="dropdown-item" href="#">Change settings</a>
-            <a class="dropdown-item" href="#">Log Out</a>
-          </div>
-        </li>
-      </ul>
-    </nav>
   </header>
   <div class="content row">
     <section class="project-section col-4">
-      <div class="row col-12 section-head">PROJECT LISTS</div>
-      <input type="text" class=" col-10 add-project" placeholder="Add New Project" required>
+      <div class="row col-12 section-head mb-5 px-5 text-white">
+        <p class="ml-sm-2 ml-0 mr-md-5"> doDo app</p>
+        <img src="dodo.png" alt="dodo logo">
+      </div>
+      <input type="text" class="project-input mb-5 add-project py-4 px-5 col-12" placeholder="Add New Project" required>
       <div class="project-list"></div>
     </section>
-    <section class="todo-section col-6">
+    <section class="todo-section col-8">
     </section>
   </div>
-  <footer class="footer-section">&#64; copyrignt reserves to Maria &#38; Suman</footer>
+  <footer class="footer">
+  </footer>
 
   <script src="main.js"></script>
   <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
