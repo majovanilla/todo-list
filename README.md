@@ -15,13 +15,18 @@
 - Javascript
 - Webpack
 
-## Settings
+## Screenshot
+![image](dist/img/screenshot2.png)
 
-- Run `npm install` to have all the needed packages to run the app.
+## Getting started
+- Clone the project using <git clone https://github.com/sumancrest0001/todo-list>
+- Run <cd todo-list> from the current directory.
+- Run <npm install> to have all the needed packages to run the app.
+- Run webpack with <npm run build> command
 
 ## Live Demo
 
-[Live Demo Link](https://majovanilla.github.io/todo-list/)
+
 
 ## Authors
 

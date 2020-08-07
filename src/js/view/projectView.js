@@ -36,12 +36,12 @@ function renderSingleProject(project, container) {
     </h2>
     <div class="indicators">
       <div class="danger-status indicator-div">
-        <div class="danger-status-text" data-projectInfo= 'd-' +${project.id}>
+        <div class="danger-status-text" data-projectInfo=d-${project.id}>
         ${getRedAlert(project.todoList)}
         </div>
       </div>
       <div class="completion-status indicator-div">
-        <div class="completion-status-text" data-projectInfo= 'c-' +${project.id}>
+        <div class="completion-status-text" data-projectInfo=c-${project.id}>
         ${updateCompletion(project)}%
         </div>
       </div>
