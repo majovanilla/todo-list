@@ -44,7 +44,7 @@
 }
 
 .project-title {
-  width: inherit;
+  width: 70%;
   overflow: hidden;
   font-size: 1.5rem;
   font-weight: bold;
@@ -52,8 +52,6 @@
 }
 
 .danger-status {
-  position: absolute;
-  display: flex;
   padding:7px;
   font-size: 8px;
   border-radius: 50%;
@@ -65,8 +63,7 @@
 }
 
 .completion-status {
-  position: absolute;
-  display: flex;
+
   width: 24px;
   height: 24px;
   font-size: 8px;

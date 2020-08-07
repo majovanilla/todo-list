@@ -1,11 +1,13 @@
-# To do List App
+# Todo List App
+  This is an application to store and manage your projects and tasks. You can add, edit and delete projects as well as tasks.
 
-> You will find a great application to store your pending activities.
-
-This project has this characteristics:
+## This project has this characteristics:
   - You can create projects with their own todo lists.
   - You can create multiple todo lists in the projects.
   - Each todo list has its own view to check for details and add notes.
+  - It also shows percentage of completion
+  - gives red flag if deadline of one todo is passed.
+  - We can mark any todo item as accomplished.
 
 ## Built With
 
@@ -31,6 +33,7 @@ This project has this characteristics:
 👤 **Suman Shrestha**
 
 - Github: [@sumancrest0001](https://github.com/sumancrest0001)
+- LinkedIn: [Suman Shrestha](https://www.linkedin.com/in/suman-shrestha0001/)
 
 ## 🤝 Contributing
 

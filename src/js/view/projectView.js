@@ -38,18 +38,20 @@ function renderProject() {
       const h2 = document.createElement('h2');
       h2.classList.add('project-title');
       h2.textContent = limitTitle(project.title, 20);
+      const icons = document.createElement('div');
       const redAlert = document.createElement('div');
       redAlert.classList.add('danger-status');
       redAlert.dataset.projectInfo = `d-${project.id}`;
       redAlert.textContent = getRedAlert(project.todoList);
-      h2.append(redAlert);
+      icons.append(redAlert);
       const completion = document.createElement('div');
       completion.classList.add('completion-status');
       completion.dataset.projectInfo = `c-${project.id}`;
       completion.textContent = `${updateCompletion(project)}%`;
-      h2.append(completion);
+      icons.append(completion);
       const deleteIcon = document.createElement('i');
       deleteIcon.classList.add('fa', 'fa-window-close', 'project-delete-icon');
+      icons.append(deleteIcon);
       projectDiv.append(h2);
       projectDiv.append(deleteIcon);
       section.append(projectDiv);
@@ -71,8 +73,6 @@ const selectedProject = (projectId) => {
 const renderNav = () => {
   const markup = `<ul class="navbar">
   <li><img src="img/logo.png" alt="logo of the app"></li>
-  <li>Suman Shreshtha</li> 
-  <li><span>LogOut</span></li>
 </ul>`;
   dom.mainnav.insertAdjacentHTML('afterbegin', markup);
 };
