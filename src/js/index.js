@@ -89,6 +89,7 @@ const mainController = (() => {
       const projectID = e.target.closest('.project').id;
       if (e.target.matches('.project-delete-icon')) {
         projectDelete(projectID);
+        console.log(projectID);
       } else {
         projectClick(projectID);
       }

@@ -26,42 +26,72 @@ const limitTitle = (title, limit = 30) => {
   return title;
 };
 
+function renderSingleProject(project, container) {
+  const singleProject = document.createElement('div');
+  singleProject.classList.add('project', 'col-12');
+  singleProject.setAttribute('id', project.id);
+  const html = `
+    <h2 class="project-title">
+      ${limitTitle(project.title, 20)}
+    </h2>
+    <div class="indicators">
+      <div class="danger-status indicator-div">
+        <div class="danger-status-text" data-projectInfo= 'd-' +${project.id}>
+        ${getRedAlert(project.todoList)}
+        </div>
+      </div>
+      <div class="completion-status indicator-div">
+        <div class="completion-status-text" data-projectInfo= 'c-' +${project.id}>
+        ${updateCompletion(project)}%
+        </div>
+      </div>
+      <i class="fa fa-window-close project-delete-icon"></i>
+    </div>
+`;
+  singleProject.innerHTML = html;
+  container.appendChild(singleProject);
+
+}
+
 function renderProject() {
   const projectsArr = JSON.parse(localStorage.getItem('projects'));
   const section = document.querySelector('.project-list');
   clearList(section);
   if (projectsArr !== null) {
     projectsArr.forEach((project) => {
-      const projectDiv = document.createElement('div');
+      renderSingleProject(project, section);
+      /* const projectDiv = document.createElement('div');
       projectDiv.classList.add('project', 'col-12');
       projectDiv.setAttribute('id', project.id);
       const h2 = document.createElement('h2');
       h2.classList.add('project-title');
       h2.textContent = limitTitle(project.title, 20);
-      const icons = document.createElement('div');
+      const indicators = document.createElement('div');
+      indicators.classList.add('indicators');
       const redAlert = document.createElement('div');
       redAlert.classList.add('danger-status');
       redAlert.dataset.projectInfo = `d-${project.id}`;
       redAlert.textContent = getRedAlert(project.todoList);
-      icons.append(redAlert);
+      indicators.append(redAlert);
       const completion = document.createElement('div');
       completion.classList.add('completion-status');
       completion.dataset.projectInfo = `c-${project.id}`;
       completion.textContent = `${updateCompletion(project)}%`;
-      icons.append(completion);
+      indicators.append(completion);
       const deleteIcon = document.createElement('i');
       deleteIcon.classList.add('fa', 'fa-window-close', 'project-delete-icon');
-      icons.append(deleteIcon);
+      indicators.append(deleteIcon);
       projectDiv.append(h2);
-      projectDiv.append(deleteIcon);
-      section.append(projectDiv);
+      projectDiv.append(indicators); */
     });
   }
 }
 
 
 const selectedProject = (projectId) => {
+  console.log(projectId);
   const previousProject = document.querySelector('.selected');
+  console.log(previousProject);
   if (previousProject) {
     previousProject.classList.remove('selected');
   }

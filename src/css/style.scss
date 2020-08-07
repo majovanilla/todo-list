@@ -9,9 +9,9 @@
   padding: 20px 10px;
   box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
   background-image: linear-gradient(to right, rgb(129, 206, 202), rgb(97, 218, 137));
-  min-height: 100vh;
+  height: 85vh;
   align-content: flex-start;
-
+  overflow-y: scroll;
 }
 
 .section-head {
@@ -43,6 +43,19 @@
   margin: 15px 0;
 }
 
+.project:hover {
+  color: #fff;
+}
+
+.indicators {
+  width: 30%;
+  display: flex;
+  direction: row;
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+
 .project-title {
   width: 70%;
   overflow: hidden;
@@ -51,28 +64,25 @@
   position: relative;
 }
 
-.danger-status {
-  padding:7px;
+.indicator-div {
+  display: flex;
+  justify-content: center;
   font-size: 8px;
   border-radius: 50%;
-  background-color: rgb(226, 80, 80);
   color: #fff;
-  top: 0;
-  right: 35px;
   align-items: center;
 }
 
-.completion-status {
+.danger-status {
+  width: 18px;
+  height: 18px;
+  background-color: rgb(226, 80, 80);
+}
 
+.completion-status {
   width: 24px;
   height: 24px;
-  font-size: 8px;
-  border-radius: 50%;
   background-color: #27a031;
-  color: #fff;
-  top: 0;
-  right: 5px;
-  align-items: center;
 }
 
 .project-delete-icon {
@@ -80,6 +90,7 @@
   opacity: 0;
   transition: all 0.5s;
 }
+
 .project:hover .project-delete-icon {
   opacity: 1;
   visibility: visible;
